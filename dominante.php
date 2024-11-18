@@ -26,7 +26,6 @@ function rgb_to_hsl($r, $g, $b) {
   $max = max( $r, $g, $b );
   $min = min( $r, $g, $b );
  
-  $h; $s;
   $l = ( $max + $min ) / 2;
   $d = $max - $min;
  
@@ -72,26 +71,26 @@ $delta=24;
 $reduce_brightness=1;
 $reduce_gradients=1;
 
-echo "Debut calcul - Nombre max de doimnante : " . $num_results;
+echo "Debut calcul - Nombre max de dominante : " . $num_results;
 
-// Choix de la photo par son ID et récupération de son chemin et nom de la photo : nomImageTest
+// Choix de la photo par son ID et rï¿½cupï¿½ration de son chemin et nom de la photo : nomImageTest
 $sql="Select idImage, nomImage, cheminImage from image";
 $result = $con->query($sql);
 while($row = $result->fetch_assoc()) {
         $nomImageTest=$row["cheminImage"]. "/" . $row["nomImage"];
 		$idImageTest=$row["idImage"];
 
-	// recherche des dominantes selon les parametres définits plus haut	
+	// recherche des dominantes selon les parametres dï¿½finits plus haut	
 	$colors=$ex->Get_Color($nomImageTest, $num_results, $reduce_brightness, $reduce_gradients, $delta);
 		
 	foreach ( $colors as $hex => $count )
 	{
 		if ( $count > 0 )
 		{
-		//transformation en pourcentage plutot que des 0.11223 et réduction a 2 chiffres après la virgule
+		//transformation en pourcentage plutot que des 0.11223 et rï¿½duction a 2 chiffres aprï¿½s la virgule
 		$pourcentage=number_format($count*100,2,'.','');
 		
-		// Convertion du modele HEX en RGB Décimal
+		// Convertion du modele HEX en RGB Dï¿½cimal
 		$colorRGB = hex2rgb($hex);
 
 		// Convertion du modele RGB en HSL
@@ -107,5 +106,5 @@ while($row = $result->fetch_assoc()) {
 }
 
 $con->close();
-echo "Calcul terminé !!!";
+echo "Calcul terminï¿½ !!!";
 ?>

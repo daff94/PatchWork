@@ -11,6 +11,12 @@ Tester l'algorithme qui permettra de se rapprocher de Photoshop et sa roue chrom
     https://stackoverflow.com/questions/1773698/rgb-to-hsv-in-php
 
 
+*** TROUVE ---
+Changer la fonction rgb_to_hsl (dominante.php) en RGB_to_HSV (transformation.php) car celle-ci correspond au TSL de Photoshop (référence)
+
+
+
+
 Tips :
 Lorsqu'on recherche une couleur avec une roue chromatique (ou input=color) (https://www.w3schools.com/howto/tryit.asp?filename=tryhow_html_colorpicker) il faut proposer une marge de recherche autour de la couleur recherchée :
 
