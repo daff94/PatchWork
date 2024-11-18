@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-	<title>Image Color Extraction</title>
+	<title>Liste toutes les photos en base</title>
 	<style type="text/css">
 		* {margin: 0; padding: 0}
 		body {text-align: center;}
@@ -9,12 +9,32 @@
 		fieldset {padding: 20px; border: solid #999 2px;}
 		img {width: 400px;}
 		table {border: solid #000 1px; border-collapse: collapse;}
-		td {border: solid #000 1px; padding: 2px 5px; white-space: nowrap;}
+		td {border: solid #000 5px; padding: 2px 5px; white-space: nowrap;}
 		br {width: 100%; height: 1px; clear: both; }
 	</style>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/tables.css" rel="stylesheet">
 </head>
 <body>
-<div id="wrap">
+
+<div class="container-fluid">
+<nav class="navbar navbar-expand-md sticky-top" style="background-color: #4da4e2;">
+        <a class="navbar-brand" href="/patchwork/index.html">PatchWork - Liste des photos</a>
+        <ul class="navbar-nav mr-auto">
+        <div class="dropdown">
+            <button class="nav-link dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Administration
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="admChargerPhoto.html">Charger des photos</a></li>
+              <li><a class="dropdown-item" href="admPurgeBase.html">Purger les références</a></li>
+			  <li><a class="dropdown-item" href="affiche_photos.php">Lister toutes les photos</a></li>
+            </ul>
+        </div>
+        </ul>
+      </nav>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
 
 <?php
 $con = mysqli_connect("localhost","root","","patchwork");
@@ -39,7 +59,7 @@ $sqlcountVariante = "SELECT count(idImage) from color";
 if ($resultToutesPhotoID->num_rows > 0) {
     while($rowImage = $resultToutesPhotoID->fetch_assoc()) {
 		//Affichage sous forme de tableau avec la couleur (couleur d'une cellule du tableau), code couleur en Hex et Pourcentage de la couleur parmis les autres
-		echo '<table><tr><td>Référence</td><td>Color</td><td>Color Code</td><td>Percentage</td><td>Rouge</td><td>Vert</td><td>Bleu</td><td>Teinte</td><td>Saturation</td><td>Luminance</td></tr>';
+		echo '<table class="center"><tr><th>Référence</th><th>Couleur</th><th>#RGB</th><th>Quantité</th><th>Rouge</th><th>Vert</th><th>Bleu</th><th>Teinte</th><th>Saturation</th><th>Luminance</th></tr>';
 
 		// Nombre de dominante pour l'image - Permet de faire une célule fusionnée pour aspect esthétique de l'affichage
 		$sqlcountdominante = "SELECT count(extIdImage) as NbrDominante from couleur where extIdImage = " . $rowImage['idImage'];
@@ -51,15 +71,15 @@ if ($resultToutesPhotoID->num_rows > 0) {
 		$sql = "SELECT hex, pourcentage,rrouge, gvert, bbleu, hteinte, ssaturation, lluminance, c.nomImage as nomImage, c.imgphoto as contenuphoto FROM couleur i INNER JOIN image c ON i.extIdImage = c.idImage where c.idImage=" . $rowImage['idImage'] . " order by i.pourcentage DESC";
 		$result = $con->query($sql);
 		while($row = $result->fetch_assoc()) {
-		echo "<td style=\"background-color:#".$row["hex"].";\"></td><td>".$row["hex"]."</td><td>".$row["pourcentage"]."</td>"."</td><td>".$row["rrouge"]."</td>"."</td><td>".$row["gvert"]."</td>"."</td><td>".$row["bbleu"]."</td>"."</td><td>".$row["hteinte"]."</td>"."</td><td>".$row["ssaturation"]."</td>"."</td><td>".$row["lluminance"]."</td></tr>";
+		echo "<td style=\"background-color:#".$row["hex"].";\"></td><td>#".$row["hex"]."</td><td>".$row["pourcentage"]."%</td>"."</td><td>".$row["rrouge"]."</td>"."</td><td>".$row["gvert"]."</td>"."</td><td>".$row["bbleu"]."</td>"."</td><td>".$row["hteinte"]."</td>"."</td><td>".$row["ssaturation"]."</td>"."</td><td>".$row["lluminance"]."</td></tr>";
 		}
-		echo '</table>';
+		echo '</table><br>';
     }
 } else {
-    echo "0 results";
+    echo "Aucun résultat";
 }
 
 $con->close();
 
-echo "</div></body></html>";
 ?>
+</div></body></html>

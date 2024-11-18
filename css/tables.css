@@ -1,0 +1,29 @@
+th {
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.1),
+      rgba(0, 0, 0, 0.5)
+    );
+    display: table-cell;
+    vertical-align: inherit;
+    font-weight: normal;
+    text-align: center;
+    border: 1px solid black;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-left: 3px;
+    padding-right: 3px;
+  }
+
+  td {
+    display: table-cell;
+    vertical-align: inherit;
+    font-weight: normal;
+    text-align: center;
+    border-bottom: 1px solid black;
+   }
+
+   .center {
+    margin-left: auto;
+    margin-right: auto;
+  }
