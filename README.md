@@ -1,3 +1,3 @@
 # PatchWork
 
-## Nouvel essai de synchro via VsCode
+18-11-2024 : Création des deux pages d'administration - Charger et Purger
