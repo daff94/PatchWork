@@ -14,7 +14,7 @@ Tester l'algorithme qui permettra de se rapprocher de Photoshop et sa roue chrom
 *** TROUVE ---
 Changer la fonction rgb_to_hsl (dominante.php) en RGB_to_HSV (transformation.php) car celle-ci correspond au TSL de Photoshop (référence)
 
-
+Pour le Design de la selection de couleurs pour la recherche de photos similaires : https://github.com/dcode-youtube/color-picker-with-local-storage
 
 
 Tips :
