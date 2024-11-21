@@ -2,24 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
 	<title>Liste toutes les photos en base</title>
-	<style type="text/css">
-		* {margin: 0; padding: 0}
-		body {text-align: center;}
-		form, div#wrap {margin: 10px auto; text-align: left; position: relative; width: 500px;}
-		fieldset {padding: 20px; border: solid #999 2px;}
-		img {width: 400px;}
-		table {border: solid #000 1px; border-collapse: collapse;}
-		td {border: solid #000 5px; padding: 2px 5px; white-space: nowrap;}
-		br {width: 100%; height: 1px; clear: both; }
-	</style>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/tables.css" rel="stylesheet">
+	<link href="css/main.css" rel="stylesheet">
 </head>
 <body>
-
-<div class="container-fluid">
+<div class="container-fluid" >
 <nav class="navbar navbar-expand-md sticky-top" style="background-color: #4da4e2;">
-        <a class="navbar-brand" href="/patchwork/index.html">PatchWork - Liste des photos</a>
+        <a class="navbar-brand" href="/patchwork/index.html" style="padding-left:15px">PatchWork</a>
         <ul class="navbar-nav mr-auto">
         <div class="dropdown">
             <button class="nav-link dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -35,6 +25,10 @@
       </nav>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+
+    <div>
+      <h1>Ensemble des photos</h1>
+    </div>
 
 <?php
 $con = mysqli_connect("localhost","root","","patchwork");

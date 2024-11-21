@@ -27,3 +27,12 @@ LARGE : on déborde et on rammasse un max de correspondance meme si on s'en élo
 Récupérer une valeur sélectionnée : https://www.w3schools.com/php/php_forms.asp
 A voir avec le choix par defaut du input pour trouver quelque chose de plus "grand" et plus complet.
 Trouvé un objet qui prendra la couleur sélectionnée car la preview est assez petite pour se faire une idée de la teinte.
+
+Tips : EN COURS
+Prévoir sur la page principale des "Caroussel" avec des mokups des photos dans des espaces amménagés comme Salon, cuisine, salle loisirs ...
+Voir avec Bootstrap pour la mise en place.
+
+Tips : Menu commun pour toutes les pages (A FAIRE)
+Voir comment inégrer un menu commun pour toutes les pages -> include
+https://www.w3schools.com/howto/howto_html_include.asp
+
