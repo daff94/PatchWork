@@ -1,8 +1,11 @@
 
-body {
-    margin: 20px;
-   }
-
 img {
     width: 400px;
 }
+
+
+#TextePresentation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
