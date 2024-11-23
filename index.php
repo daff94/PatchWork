@@ -33,15 +33,8 @@
 </div>  
 
   
-<!-- Fenetre A PROPOS seulement accessible depuis le menu "A propos" -->
-  <div id="apropos" class="modal">
-    <div class="modal_content">
-      <h1>PatchWork - v0.2-2024</h1>
-      <p>Réalisé en HTML, CSS, PHP et MySql<br>Développé avec IDE VSCode et IntelliJ</p>
-      <p>Fabriqué par Yoann Tessier</p>
-      <a href="#" class="modal_close">&times;</a>
-    </div>
-  </div>
+<!-- Code pour la fenetre modale - A propos-->
+<?php include 'modale.html' ?>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
