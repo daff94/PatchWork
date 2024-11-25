@@ -34,6 +34,7 @@ if ($con->query($sqlInsertionImage) === FALSE) {
 if ($con->query($sqlInsertionCouleur) === FALSE) {
     echo "Error: Copie des éléments dans la nouvelle table COULEUR" . $con->error; }
 
+$con->close();
 }
 
 /* ************************************************** */ 
@@ -84,4 +85,5 @@ switch ($action) {
         break;
 }
 
+$con->close();
 ?>
