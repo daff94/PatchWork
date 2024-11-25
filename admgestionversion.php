@@ -2,6 +2,47 @@
 
 <?php
 
+/* ******************************************* */ 
+/* LISTER toutes les versions de IMAGE/COULEUR */
+/* ******************************************* */
+function ListeVersion() {
+/* Connexion sur la base de travail */
+$con = mysqli_connect("localhost","root","","patchwork");
+
+// Check connection
+if (mysqli_connect_errno())
+  {   echo "Failed to connect to MySQL: " . mysqli_connect_error();  }
+
+$sqlListeVersion = "SELECT * FROM INFORMATION_SCHEMA.TABLES where TABLE_NAME like 'image%';";
+
+$result = $con->query($sqlListeVersion);
+echo "<select name=table>";
+while ($row = mysqli_fetch_array($result)) {
+    echo "<option value='".$row[2]."'>".$row[2]."</option>";
+}
+echo "</select>";
+/*
+if ($con->query($sqlListeVersion) === FALSE) {
+    echo "Error: Pas de table versionnée" . $con->error; }
+else {
+    $result = $con->query($sqlListeVersion);
+}
+
+echo "<p><label>Selectionnez la table : </label>";
+echo "<select name=table>";
+while ($ligne = $con->fetch($result))
+{
+    echo "<option value='".$ligne[0]."'>".$ligne[0]."</option>";
+}
+echo "</select>";
+*/
+
+
+$con->close();
+}
+
+
+
 /* *********************************************** */ 
 /* CREATION d'une version des tables IMAGE/COULEUR */
 /* *********************************************** */
@@ -71,7 +112,7 @@ if (isset($_GET['action']) AND isset($_GET['version']))
 }
 else // Il manque des paramètres, on avertit le visiteur
 {
-       echo 'Error : Il faut les deux parametres ACTION et VERSOIN dans URL';
+       echo 'Error : Il faut les deux parametres ACTION et VERSION dans URL';
 }
 
 switch ($action) {
@@ -83,7 +124,10 @@ switch ($action) {
         echo "copie demandée d'une table avec la version v" . $version;
         DuplicataVersion($version);
         break;
+    case "listeversion":
+            echo "Voici les versions trouvées : ";
+            ListeVersion();
+            break;
 }
 
-$con->close();
 ?>
