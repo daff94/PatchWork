@@ -37,6 +37,17 @@ A voir avec le choix par defaut du input pour trouver quelque chose de plus "gra
 Trouvé un objet qui prendra la couleur sélectionnée car la preview est assez petite pour se faire une idée de la teinte.
 
 
+### Verisonning des ensembles image/couleur
+Création de la partie tehcnique en base 
+CREATE TABLE image_vX LIKE image;
+INSERT INTO image_vX SELECT * FROM image;
+DROP TABLE image_vX.
+Le faire pour le couple image/couleur.
+- [ ] Il faut mettre en place l'IHM Web
+- [ ] Afficher l'ensemble des versions en base
+- [ ] un bouton par version trouvée et lancer la suppression version par version
+
+
 ## ARCHIVES
 - 23.11.2024
 Menu commun pour toutes les pages - TERMINE - fichier HTML "menu_principal.html" en include php
