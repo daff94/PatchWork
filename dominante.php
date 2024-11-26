@@ -71,9 +71,9 @@ function RGB_to_HSV($r, $g, $b) {
   elseif ($delta_min_max !== 0 && $max === $b            ) $result_h = 60 * (($r - $g) / $delta_min_max) + 240;
   $result_s = $max === 0 ? 0 : (1 - ($min / $max));
   $result_v = $max;
-  $result['h'] = (int)(round($result_h));
-  $result['s'] = (int)($result_s * 100);
-  $result['v'] = (int)($result_v / 2.55);
+  $result[0] = (int)(round($result_h));
+  $result[1] = (int)($result_s * 100);
+  $result[2] = (int)($result_v / 2.55);
   return $result;
 }
 
@@ -116,20 +116,22 @@ while($row = $result->fetch_assoc()) {
 		
 		// Convertion du modele HEX en RGB D�cimal
 		$colorRGB = hex2rgb($hex);
-
 		// Convertion du modele RGB en HSL
-		$colorHSL = rgb_to_hsl($colorRGB[0],$colorRGB[1],$colorRGB[2]);
+		// $colorHSL = rgb_to_hsl($colorRGB[0],$colorRGB[1],$colorRGB[2]);
 
     // Converion du modele RGB en HSV
     $colorHSV = RGB_to_HSV($colorRGB[0],$colorRGB[1],$colorRGB[2]);
 
 		//insertion en base des valeurs HEX (num_results) pour l'image choisi
-		// $sql = "INSERT INTO couleur(extIdImage,hex, pourcentage, rrouge, gvert, bbleu, hteinte, ssaturation, lluminance) VALUES ($idImageTest,'$hex', $pourcentage, $colorRGB[0], $colorRGB[1],$colorRGB[2],$colorHSL[0],$colorHSL[1],$colorHSL[2])";
+		//$sql = "INSERT INTO couleur(extIdImage,hex, pourcentage, rrouge, gvert, bbleu, hteinte, ssaturation, lluminance) VALUES ($idImageTest,'$hex', $pourcentage, $colorRGB[0], $colorRGB[1],$colorRGB[2],$colorHSL[0],$colorHSL[1],$colorHSL[2])";
+
     $sql = "INSERT INTO couleur(extIdImage,hex, pourcentage, rrouge, gvert, bbleu, hteinte, ssaturation, lluminance) VALUES ($idImageTest,'$hex', $pourcentage, $colorRGB[0], $colorRGB[1],$colorRGB[2],$colorHSV[0],$colorHSV[1],$colorHSV[2])";
 		
-		if ($con->query($sql) === FALSE) {
-		echo "Error: " . $sql . "<br>" . $con->error; }
-		}
+      if ($con->query($sql) === FALSE) {
+      echo "Error: " . $sql . "<br>" . $con->error; }
+    
+    }
+    
 	}
 }
 
