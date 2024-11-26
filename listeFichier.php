@@ -35,7 +35,7 @@ if (is_dir($dir)) {
 				}
 				
 				
-				$sql="INSERT INTO image(cheminImage,nomImage,photo,orientation) VALUES ('$dir','$file', " . "'" . addslashes($phototrouve) . "'" . ",$orientation)";
+				$sql="INSERT INTO image(cheminImage,nomImage,imgphoto,orientation) VALUES ('$dir','$file', " . "'" . addslashes($phototrouve) . "'" . ",$orientation)";
 				if ($con->query($sql) === FALSE) {
 					echo "Error: " . $sql . "<br>" . $con->error; }
 				echo "Import de la photo" . $dir . $file . " terminée." . "<br> ";
@@ -54,7 +54,7 @@ $result = $con->query($sql);
 
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
-		echo "<img src='" . "data:image/jpeg;base64," . base64_encode($row['photo']) . "'/>";
+		echo "<img src='" . "data:image/jpeg;base64," . base64_encode($row['imgphoto']) . "'/>";
     }
 } else {
     echo "0 results";
