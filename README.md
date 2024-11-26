@@ -3,6 +3,11 @@
 18-11-2024 : Création des deux pages d'administration - Charger et Purger
 Pas de contenu pour l'instant, la priorité sur le calcul des couleurs cf. # 
 
+## IMPORTANT - Configuration du serveur pour lib GD
+- go to php.ini file
+- search this ;extension=gd
+- remove ; then restart the server
+
 ## Calcul de la dominante et son interprétation HSL
 Revoir la transformation entre RGB et TSL - Les couleurs ne correspondent pas sous Photoshop.
 Seule la couleur en RGB (Hexa) correspond à une couleur dans Photoshop
