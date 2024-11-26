@@ -18,14 +18,13 @@ Tester l'algorithme qui permettra de se rapprocher de Photoshop et sa roue chrom
     https://stackoverflow.com/questions/1773698/rgb-to-hsv-in-php
 
 
-- [ ] Changer la formule HSL
+- [X] Changer la formule HSL
 - [ ] Mettre en place la purge de la base (image -> repertoire corbeille)
 - [ ] Charger les photos : soit sélection répertoire mais le mieux serait "glisser/lacher" pour qu'elle soit intégrée
-- [ ] Séelection des photos selon une couleur choisie avec une marge d'erreur
+- [ ] Sélection des photos selon une couleur choisie avec une marge d'erreur
+- [ ] Chargement multiple des photos selon choix utilisateur du répertoire
 
 *** TROUVE ***
-Changer la fonction rgb_to_hsl (dominante.php) en RGB_to_HSV (transformation.php) car celle-ci correspond au TSL de Photoshop (référence)
-
 Pour le Design de la selection de couleurs pour la recherche de photos similaires : https://github.com/dcode-youtube/color-picker-with-local-storage
 
 
@@ -63,3 +62,5 @@ https://www.w3schools.com/howto/howto_html_include.asp
 Prévoir sur la page principale des "Caroussel" avec des mokups des photos dans des espaces amménagés comme Salon, cuisine, salle loisirs ...
 Voir avec Bootstrap pour la mise en place.
 
+- 25.11.2024
+Changer la fonction rgb_to_hsl (dominante.php) en RGB_to_HSV (transformation.php) car celle-ci correspond au TSL de Photoshop (référence)
