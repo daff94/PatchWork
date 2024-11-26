@@ -1,4 +1,11 @@
 <?php
+
+
+/* Pour le chargement de plusieurs fichiers contenus dans un répertoire
+/* s'insspirer de l'aide : 
+/* https://stackoverflow.com/questions/2704314/multiple-file-upload-in-php
+*/
+
 $target_dir = "uploads/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
