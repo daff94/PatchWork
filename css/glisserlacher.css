@@ -1,0 +1,29 @@
+
+div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+div img {
+    width: 400px;
+    height: 300px;
+    border: 2px solid #ff3d0036;
+    border-radius: 13px;
+    box-shadow: 4px 7px 7px 0px #00000042;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.valise {
+    height: 50px;
+    background-color: rgba(204,204,204,0.35);
+    display: block;
+    width: 25%;
+    margin: 10px auto;
+    padding: 4px 20px;
+    border: 1px dashed grey;
+    border-radius: 10px;
+    text-align: center;
+}
