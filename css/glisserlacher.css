@@ -27,3 +27,29 @@ div img {
     border-radius: 10px;
     text-align: center;
 }
+
+.chxcolor { 
+    text-align : center;
+    align-content: center;
+
+}
+.carrepreview { 
+    height: 200px;
+    border: 2px solid black;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 15px;
+}
+.boutonchoix {
+    background-color: #04AA6D; /* Green */
+    border: none;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 12px;
+}
