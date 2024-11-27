@@ -2,54 +2,65 @@
 
 
 /* Pour le chargement de plusieurs fichiers contenus dans un répertoire
-/* s'insspirer de l'aide : 
+/* s'inspirer de l'aide : 
 /* https://stackoverflow.com/questions/2704314/multiple-file-upload-in-php
 */
 
-$target_dir = "uploads/";
-$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-$uploadOk = 1;
-$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-
-// Check if image file is a actual image or fake image
 if(isset($_POST["submit"])) {
-  $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+// var_dump($_FILES);
+
+  foreach ($_FILES['fileToUpload']['tmp_name'] as $key => $tmp_name)
+    {
+    $nameDestination = $_FILES['fileToUpload']['name'][$key];
+    $nameTemp = $_FILES["fileToUpload"]["tmp_name"][$key];
+    $target_dir = "uploads/";
+    $target_file = $target_dir . $nameDestination;
+    $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+    if (checkImageType($nameTemp) == true AND checkFichierExistant($target_file) == false)
+      {
+      if (move_uploaded_file($nameTemp, $target_file)) 
+        {
+        echo "<br>" . "L'image ". $nameDestination . " a été chargé.";
+        } else {
+        echo "<br>" . "Désolé, une erreur s'est produite au chargement du fichier.";
+        }
+      }
+    }
+}
+
+// fonction pour déterminer si le fichier est une image
+function checkImageType($nameTemp) {
+  $check = getimagesize($nameTemp);
   if($check !== false) {
-    echo "Le fichier est de type - " . $check["mime"] . ".";
+    echo "<br>" . "Le fichier est de type - " . $check["mime"] . ".";
     $uploadOk = 1;
   } else {
-    echo "Le fichier n'est pas une image.";
+    echo "<br>" . "Le fichier n'est pas une image.";
     $uploadOk = 0;
   }
+  return $uploadOk;
 }
 
-// Check if file already exists
-if (file_exists($target_file)) {
-  echo "Désolé, le fichier image existe déjà sur le serveur.";
-  $uploadOk = 0;
-}
-
-// Check file size
-if ($_FILES["fileToUpload"]["size"] > 5120000) {
-  echo "Désolé, la taille du fichier est trop importante (<5Mo)";
-  $uploadOk = 0;
-}
-
-// Allow certain file formats
-if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" ) {
-  echo "Désolé, seulement les images de type : JPG, JPEG, PNG & GIF sont autorisés.";
-  $uploadOk = 0;
-}
-
-// Check if $uploadOk is set to 0 by an error
-if ($uploadOk == 0) {
-  echo "Erreur de chargement.";
-// if everything is ok, try to upload file
-} else {
-  if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-    echo "L'image ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " a été chargé.";
-  } else {
-    echo "Désolé, une erreur s'est produite au chargement du fichier.";
+// fonction qui valide que le fichier n'est pas déjà télécharger (meme nom dans le répertoire de dépot)
+function checkFichierExistant($target_file) {
+  $filexiste = false;
+  if (file_exists($target_file)) {
+    echo "<br>" . $target_file;
+    echo "<br>" . "Désolé, le fichier image existe déjà sur le serveur.";
+    $filexiste = true;
   }
+  return $filexiste;
 }
+
+
+// fonction qui permet de ne télécharger que les fichiers images du type JPEG/JPG/GIF/PNG
+function checkExtensionImage($imageFileType) {
+  $ExtensionImage = true;
+  if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" ) {
+    echo "<br>" . "Désolé, seulement les images de type : JPG, JPEG, PNG & GIF sont autorisés.";
+    $ExtensionImage = false;
+  }
+  return $ExtensionImage;
+}
+
 ?>
