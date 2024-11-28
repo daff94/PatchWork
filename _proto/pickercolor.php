@@ -9,10 +9,11 @@
     <script src="../js/jscolor.js"></script>
     <link href="../css/pickercolor.css" rel="stylesheet">
 
-    <script>
+    <script type="text/javascript" language="JavaScript">
     // Here we can adjust defaults for all color pickers on page:
     jscolor.presets.default = {
-        position: 'right',
+        position: 'bottom',
+        shadow: true,
         height: 250,
         width:250,
         palette: [
@@ -26,17 +27,35 @@
     };
     </script>
 
+    <script type="text/javascript">
+    function affComplementaire()
+    {
+        // Récupération de la couleur choisi
+        const chxColor = document.querySelector('#pr1').getAttribute('data-current-color');
+         // data-current-color est au format : rgb(51,153,255)
+        const deci = chxColor.replace("rgb(", "").replace(")", "").split(",");
+        const r = deci[0];
+        const g = deci[1];
+        const b = deci[2];
+
+        // faire le calcul ou transformation pour trouver la couleur complémentaire
+        const cr = 255 - r;
+        const cg = 255 - g;
+        const cb = 255 - b;
+        /*
+        console.log(r, g, b);
+        console.log(cr, cg, cb);
+        console.log("rgb("+cr+","+cg+","+cb+")");
+        */
+        // const chxColor = document.querySelector('#pr1').getAttribute('data-current-color');
+        document.querySelector('#couleurComplementaire').style.backgroundColor = "rgb("+cr+","+cg+","+cb+")";
+    }
+    </script> 
 </head>
 <body>
-
-<!-- Afficher le code RGB et HSL de la couleur choisi -->
-<!-- Afficher la couleur complémentaire -->
-
-<div class="carrepreview" id="pr1" >&nbsp;</div>
-<div class="carrecomplementaire" id="prevcomplementaire" >&nbsp;</div>
-<div class="chxcolor"><button class="boutonchoix" data-jscolor="{previewElement:'#pr1', preset: 'dark', value:'rgb(51,153,255)'}">Choix de la couleur</button></div>
-
-
-
+<div class="container">
+    <div class="carrepreview" id="pr1" data-jscolor="{previewElement:'#pr1', preset: 'dark', value:'rgb(170,80,30)', onInput: 'affComplementaire()'}" >&nbsp;</div>
+    <div class="carrecomplementaire" id="couleurComplementaire" style="background-color: rgb(85,179,226); "><p>Complémentaire</p></div>
+</div>
 </body>
 </html>

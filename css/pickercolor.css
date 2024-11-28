@@ -1,25 +1,22 @@
-.chxcolor { 
-    text-align : center;
-    align-content: center;
-}
+
 .carrepreview, .carrecomplementaire  { 
-    height: 200px;
+    height: 100px;
     border: 2px solid black;
     padding: 10px;
     margin: 10px;
     border-radius: 15px;
+    display:flex;
+    box-shadow: 10px 5px 5px rgb(80, 80, 80);
 }
 
-.boutonchoix {
-    background-color: #04AA6D; /* Green */
-    border: none;
-    color: white;
-    padding: 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 12px;
+.container {
+    display:inline;
+    width: auto;
+}
+
+p {
+    font-family: arial;
+    font-size: large;
+    font-weight: lighter;
+    text-shadow: 4px 4px 5px rgb(80, 80, 80);
 }
