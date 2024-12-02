@@ -27,7 +27,7 @@
     };
     </script>
 
-    <script type="text/javascript">
+    <script type="text/javascript" language="JavaScript">
     function affComplementaire()
     {
         // Récupération de la couleur choisi
