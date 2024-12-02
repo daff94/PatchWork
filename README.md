@@ -28,8 +28,10 @@ Lorsqu'on recherche une couleur avec une roue chromatique (ou input=color) (http
 
 ### Verisonning des ensembles image/couleur
 Création de la partie tehcnique en base 
-CREATE TABLE image_vX LIKE image;
+CREATE TABLE image_vX LIKE refimage;
 INSERT INTO image_vX SELECT * FROM image;
+Activation : faire pointer les Views Image/Couleur vers image_x/couleur_x précédement créées
+
 DROP TABLE image_vX.
 Le faire pour le couple image/couleur.
 - [ ] Il faut mettre en place l'IHM Web

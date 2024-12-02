@@ -34,7 +34,7 @@ if (mysqli_connect_errno())
 $sqlToutesPhotoID = "SELECT idImage, imgphoto from image";
 $resultToutesPhotoID = $con->query($sqlToutesPhotoID);
 
-$sqlcountVariante = "SELECT count(idImage) from color";
+// $sqlcountVariante = "SELECT count(idImage) from color";
 
 
 if ($resultToutesPhotoID->num_rows > 0) {
