@@ -26,6 +26,10 @@ Lorsqu'on recherche une couleur avec une roue chromatique (ou input=color) (http
 - REGULAR : juste un peu plus au tour (valuer par défaut)
 - LARGE : on déborde et on rammasse un max de correspondance meme si on s'en éloigne un peu.
 
+### Possibilité d'avoir la couleur complémentaire, mais également des couleurs similaires sur le cercles chromatique
+Actuellement le choix est fait via une box, puis nous aurons le remplissage de cadre avec la couleur complémentaire (en place) et les couleurs semblables (en cours)
+Pour les couleurs semblables, actuellement nous en avons deux espacées de 30° par rapport a la couleur choisie. A voir pour créer un algo pour X couleurs semblables avec un degré d'ecart paramètrable.
+
 ### Verisonning des ensembles image/couleur
 Création de la partie tehcnique en base 
 CREATE TABLE image_vX LIKE refimage;
