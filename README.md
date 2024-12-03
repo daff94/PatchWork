@@ -41,6 +41,7 @@ Le faire pour le couple image/couleur.
 - [ ] Il faut mettre en place l'IHM Web
 - [ ] Afficher l'ensemble des versions en base
 - [ ] un bouton par version trouvée et lancer la suppression version par version
+- [ ] Mise en place d'une corbeille
 
 
 ## ARCHIVES
@@ -70,3 +71,7 @@ RVB -> TSL OK contrairement au TSL de l'application PatchWork.
 /!\  IL FAUT REVOIR LA TRANSFORMATION RGB to TSL lorsque les photos sont intégrées
 Tester l'algorithme qui permettra de se rapprocher de Photoshop et sa roue chromatique.
     https://stackoverflow.com/questions/1773698/rgb-to-hsv-in-php
+
+## DOCUMENTATIONS
+Page avec l'ensemble des formules de conversion des couleurs : 
+https://gist.github.com/mjackson/5311256?permalink_comment_id=2357261
