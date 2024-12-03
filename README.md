@@ -75,3 +75,4 @@ Tester l'algorithme qui permettra de se rapprocher de Photoshop et sa roue chrom
 ## DOCUMENTATIONS
 Page avec l'ensemble des formules de conversion des couleurs : 
 https://gist.github.com/mjackson/5311256?permalink_comment_id=2357261
+Outil de conversion PHP->Javascript : https://www.codeconvert.ai/php-to-javascript-converter
