@@ -150,7 +150,7 @@
         // Récupération de la couleur choisi
         const chxColor = document.querySelector('#pr1').getAttribute('data-current-color');
          // data-current-color est au format : rgb(51,153,255)
-        const delta = 30;
+        const delta = 20;
         const deci = chxColor.replace("rgb(", "").replace(")", "").split(",");
         const r = deci[0];
         const g = deci[1];
