@@ -207,12 +207,15 @@
     </script> 
 </head>
 <body>
+<div class="container">
     <div class="carrecomplementaire" id="couleurComplementaire" style="background-color: rgb(85,179,226); "><p>Complémentaire</p></div>
     <div class="parent">
         <div class="div1 carrepreview" id="couleurSemblableMoins"><p>Semblable Gauche</p></div>
         <div class="div2 carrepreview" id="pr1" data-jscolor="{previewElement:'#pr1', preset: 'dark', value:'rgb(170,80,30)', onInput: 'affComplementaire()'}" ><p>Référence</p></div>
         <div class="div3 carrepreview" id="couleurSemblablePlus"><p>Semblable Droite</p></div>
     </div>
+    <div><button class="button" type="button">Rechercher les photos similaires</button></div>
+</div>
 
 </body>
 </html>
