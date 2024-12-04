@@ -15,6 +15,8 @@ Pas de contenu pour l'instant, la priorité sur le calcul des couleurs cf. #
 - [ ] Ajouter une zone de saisie en HEX pour le choix de la couleur de REFERENCE
 - [ ] Ajouter une case à option (3 choix) pour la finesse THIN / REGULAR / LARGE
 - [ ] Lorsqu'on clique sur une couleur complémentaire/gauche/droite, elle devient la couleur de Référence (et calculer les autres couleurs)
+- [ ] Basculer en AJAX toute la gestion de version et sauvegarde des tables (purge -> base corbeille / images -> rep. corbeille)
+- [ ] Mettre en place le Workflow suivant : upload des nouvelles images -> insertion en base (choix de version) -> Lancement de la recherche des dominantes
 
 
 ## Tips
@@ -27,6 +29,7 @@ Lorsqu'on recherche une couleur avec une roue chromatique (ou input=color) (http
 
 
 ### Verisonning des ensembles image/couleur
+AJAX : https://www.w3schools.com/php/php_ajax_database.asp
 Création de la partie tehcnique en base 
 CREATE TABLE image_vX LIKE refimage;
 INSERT INTO image_vX SELECT * FROM image;
@@ -36,8 +39,9 @@ DROP TABLE image_vX.
 Le faire pour le couple image/couleur.
 - [ ] Il faut mettre en place l'IHM Web
 - [ ] Afficher l'ensemble des versions en base
-- [ ] un bouton par version trouvée et lancer la suppression version par version
+- [ ] un bouton par version trouvée et lancer la suppression version par version (prefixe "archive_")
 - [ ] Mise en place d'une corbeille
+- [ ] Déplacement des fichiers correspondants dans un répertoire "corbeille"
 
 
 ## ARCHIVES
