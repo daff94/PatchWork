@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Choisir une couleur</title>
     <scipt src="pickercolor.js"></scipt>
-    <script src="../js/jscolor.js"></script>
-    <link href="../css/pickercolor.css" rel="stylesheet">
+    <script src="js/jscolor.js"></script>
+    <link href="css/pickercolor.css" rel="stylesheet">
 
     <script type="text/javascript" language="JavaScript">
     // Here we can adjust defaults for all color pickers on page:
@@ -29,76 +29,6 @@
 
     <script type="text/javascript" language="JavaScript">
     
-
-    function HSV_TO_RGB(h,s,v) {
-        // var h = hsv.hue, s = hsv.sat, v = hsv.val;
-        var rgb, i, data = [];
-        if (s === 0) {
-            rgb = [v,v,v];
-        } else {
-            h = h / 60;
-            i = Math.floor(h);
-            data = [v*(1-s), v*(1-s*(h-i)), v*(1-s*(1-(h-i)))];
-            switch(i) {
-            case 0:
-                rgb = [v, data[2], data[0]];
-                break;
-            case 1:
-                rgb = [data[1], v, data[0]];
-                break;
-            case 2:
-                rgb = [data[0], v, data[2]];
-                break;
-            case 3:
-                rgb = [data[0], data[1], v];
-                break;
-            case 4:
-                rgb = [data[2], data[0], v];
-                break;
-            default:
-                rgb = [v, data[0], data[1]];
-                break;
-            }
-        }
-        return '#' + rgb.map(function(x){ 
-            return ("0" + Math.round(x*255).toString(16)).slice(-2);
-        }).join('');
-    }
-
-
-
-
-    function RGB_TO_HSV(r, g, b) 
-    {
-        r = Math.max(0, Math.min(parseInt(r), 255));
-        g = Math.max(0, Math.min(parseInt(g), 255));
-        b = Math.max(0, Math.min(parseInt(b), 255));
-        const result = [];
-        const min = Math.min(r, g, b);
-        const max = Math.max(r, g, b);
-        const delta_min_max = max - min;
-        let result_h = 0;
-
-        if (delta_min_max !== 0 && max === r && g >= b) {
-            result_h = 60 * ((g - b) / delta_min_max) + 0;
-        } else if (delta_min_max !== 0 && max === r && g < b) {
-            result_h = 60 * ((g - b) / delta_min_max) + 360;
-        } else if (delta_min_max !== 0 && max === g) {
-            result_h = 60 * ((b - r) / delta_min_max) + 120;
-        } else if (delta_min_max !== 0 && max === b) {
-            result_h = 60 * ((r - g) / delta_min_max) + 240;
-        }
-
-        const result_s = max === 0 ? 0 : (1 - (min / max));
-        const result_v = max;
-        result[0] = Math.round(result_h);
-        result[1] = Math.floor(result_s * 100);
-        result[2] = Math.floor(result_v / 2.55);
-        
-        return result;
-    }
-
-
     function hsvToRgb_min(h, s, v) {
         var r, g, b;
 

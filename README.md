@@ -9,13 +9,12 @@ Pas de contenu pour l'instant, la priorité sur le calcul des couleurs cf. #
 - remove ; then restart the server
 
 - [X] Changer la formule HSL
-- [ ] Mettre en place la purge de la base (image -> repertoire corbeille)
-- [x] Charger les photos : soit sélection répertoire mais le mieux serait "glisser/lacher" pour qu'elle soit intégrée
-- [ ] Sélection des photos selon une couleur choisie avec une marge d'erreur
-- [x] Chargement multiple des photos selon choix utilisateur du répertoire
-
-*** TROUVE ***
-Pour le Design de la selection de couleurs pour la recherche de photos similaires : https://github.com/dcode-youtube/color-picker-with-local-storage
+- [ ] Mettre en place la purge de la base (images -> repertoire corbeille)
+- [X] Charger les photos : soit sélection répertoire mais le mieux serait "glisser/lacher" pour qu'elle soit intégrée
+- [X] Chargement multiple des photos selon choix utilisateur du répertoire
+- [ ] Ajouter une zone de saisie en HEX pour le choix de la couleur de REFERENCE
+- [ ] Ajouter une case à option (3 choix) pour la finesse THIN / REGULAR / LARGE
+- [ ] Lorsqu'on clique sur une couleur complémentaire/gauche/droite, elle devient la couleur de Référence (et calculer les autres couleurs)
 
 
 ## Tips
@@ -26,9 +25,6 @@ Lorsqu'on recherche une couleur avec une roue chromatique (ou input=color) (http
 - REGULAR : juste un peu plus au tour (valuer par défaut)
 - LARGE : on déborde et on rammasse un max de correspondance meme si on s'en éloigne un peu.
 
-### Possibilité d'avoir la couleur complémentaire, mais également des couleurs similaires sur le cercles chromatique
-Actuellement le choix est fait via une box, puis nous aurons le remplissage de cadre avec la couleur complémentaire (en place) et les couleurs semblables (en cours)
-Pour les couleurs semblables, actuellement nous en avons deux espacées de 30° par rapport a la couleur choisie. A voir pour créer un algo pour X couleurs semblables avec un degré d'ecart paramètrable.
 
 ### Verisonning des ensembles image/couleur
 Création de la partie tehcnique en base 
@@ -58,7 +54,7 @@ Voir avec Bootstrap pour la mise en place.
 Changer la fonction rgb_to_hsl (dominante.php) en RGB_to_HSV (transformation.php) car celle-ci correspond au TSL de Photoshop (référence)
 
 - 28.11.2024
-Outil pour sélectionner la couleur : https://www.w3schools.com/php/php_forms.asp
+Utilisation du module Javascript : https://jscolor.com/
 A voir avec le choix par defaut du input pour trouver quelque chose de plus "grand" et plus complet.
 Trouvé un objet qui prendra la couleur sélectionnée car la preview est assez petite pour se faire une idée de la teinte.
 
@@ -71,6 +67,12 @@ RVB -> TSL OK contrairement au TSL de l'application PatchWork.
 /!\  IL FAUT REVOIR LA TRANSFORMATION RGB to TSL lorsque les photos sont intégrées
 Tester l'algorithme qui permettra de se rapprocher de Photoshop et sa roue chromatique.
     https://stackoverflow.com/questions/1773698/rgb-to-hsv-in-php
+
+- 04.12.2024
+Possibilité d'avoir la couleur complémentaire, mais également des couleurs similaires sur le cercles chromatique
+Actuellement le choix est fait via une box, puis nous aurons le remplissage de cadre avec la couleur complémentaire (en place) et les couleurs semblables (en cours)
+Pour les couleurs semblables, actuellement nous en avons deux espacées de 30° par rapport a la couleur choisie. A voir pour créer un algo pour X couleurs semblables avec un degré d'ecart paramètrable.
+
 
 ## DOCUMENTATIONS
 Page avec l'ensemble des formules de conversion des couleurs : 
