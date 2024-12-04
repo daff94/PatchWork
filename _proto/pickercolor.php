@@ -144,7 +144,41 @@
         return [ h, s, v ];
         }
 
-   
+
+    function affSemblable()
+    {
+        // Récupération de la couleur choisi
+        const chxColor = document.querySelector('#pr1').getAttribute('data-current-color');
+         // data-current-color est au format : rgb(51,153,255)
+        const delta = 30;
+        const deci = chxColor.replace("rgb(", "").replace(")", "").split(",");
+        const r = deci[0];
+        const g = deci[1];
+        const b = deci[2];
+        // console.log("Couleur sélectionnée en RGB : " + deci);
+        const hsv = rgbToHsv_min(r,g,b);
+        // Après la conversion on remet les valeurs correspondantes à la roue Chromatique
+        // https://fr.wikipedia.org/wiki/Cercle_chromatique#/media/Fichier:CYM_color_wheel.png
+        const tdegre = Math.round(hsv[0] * 360);
+        const spourc = Math.round(hsv[1] * 100);
+        const lpourc = Math.round(hsv[2] * 100);
+        // On ajoute les delta sup. et inf. pour avoir des couleurs semblables
+        const tPlus = tdegre + delta;
+        const tMoins = tdegre - delta;
+        // On remet les valeurs en HSV
+        const hsvPlus = [tPlus / 360, spourc / 100, lpourc / 100];
+        const hsvMoins = [tMoins / 360 , spourc / 100, lpourc / 100];
+        // Convertion des valeurs HSV en RGB
+        const rvbsemblablePlus = hsvToRgb_min(hsvPlus[0],hsvPlus[1], hsvPlus[2]);
+        const rvbsemblableMoins = hsvToRgb_min(hsvMoins[0],hsvMoins[1], hsvMoins[2]);
+        // Affichage des codes RGB des couleurs semblables
+        // console.log("Valeur semblable Plus : " + rvbsemblablePlus[0], rvbsemblablePlus[1], rvbsemblablePlus[2]);
+        // console.log("Valeur semblable Moins : " + rvbsemblableMoins[0], rvbsemblableMoins[1] , rvbsemblableMoins[2]);
+        document.querySelector('#couleurSemblablePlus').style.backgroundColor = "rgb("+rvbsemblablePlus[0]+","+rvbsemblablePlus[1]+","+rvbsemblablePlus[2]+")";
+        document.querySelector('#couleurSemblableMoins').style.backgroundColor = "rgb("+rvbsemblableMoins[0]+","+rvbsemblableMoins[1]+","+rvbsemblableMoins[2]+")";
+    }
+
+
     function affComplementaire()
     {
         // Récupération de la couleur choisi
@@ -166,45 +200,19 @@
         */
         // const chxColor = document.querySelector('#pr1').getAttribute('data-current-color');
         document.querySelector('#couleurComplementaire').style.backgroundColor = "rgb("+cr+","+cg+","+cb+")";
+        affSemblable();
     }
 
-    function affSemblable()
-    {
-        // Récupération de la couleur choisi
-        const chxColor = document.querySelector('#pr1').getAttribute('data-current-color');
-         // data-current-color est au format : rgb(51,153,255)
-        const delta = 30;
-        const deci = chxColor.replace("rgb(", "").replace(")", "").split(",");
-        const r = deci[0];
-        const g = deci[1];
-        const b = deci[2];
-        console.log("Couleur sélectionnée en RGB : " + deci);
-        const hsv = rgbToHsv_min(r,g,b);
-        // Après la conversion on remet les valeurs correspondantes à la roue Chromatique
-        // https://fr.wikipedia.org/wiki/Cercle_chromatique#/media/Fichier:CYM_color_wheel.png
-        const tdegre = Math.round(hsv[0] * 360);
-        const spourc = Math.round(hsv[1] * 100);
-        const lpourc = Math.round(hsv[2] * 100);
-        // On ajoute les delta sup. et inf. pour avoir des couleurs semblables
-        const tPlus = tdegre + delta;
-        const tMoins = tdegre - delta;
-        // On remet les valeurs en HSV
-        const hsvPlus = [tPlus / 360, spourc / 100, lpourc / 100];
-        const hsvMoins = [tMoins / 360 , spourc / 100, lpourc / 100];
-        // Convertion des valeurs HSV en RGB
-        const rvbsemblablePlus = hsvToRgb_min(hsvPlus[0],hsvPlus[1], hsvPlus[2]);
-        const rvbsemblableMoins = hsvToRgb_min(hsvMoins[0],hsvMoins[1], hsvMoins[2]);
-        // Affichage des codes RGB des couleurs semblables
-        console.log("Valeur semblable Plus : " + rvbsemblablePlus[0], rvbsemblablePlus[1], rvbsemblablePlus[2]);
-        console.log("Valeur semblable Moins : " + rvbsemblableMoins[0], rvbsemblableMoins[1] , rvbsemblableMoins[2]);
-    }
+   
     </script> 
 </head>
 <body>
-<div class="container">
-    <div class="carrepreview" id="pr1" data-jscolor="{previewElement:'#pr1', preset: 'dark', value:'rgb(170,80,30)', onInput: 'affComplementaire()'}" >&nbsp;</div>
     <div class="carrecomplementaire" id="couleurComplementaire" style="background-color: rgb(85,179,226); "><p>Complémentaire</p></div>
-    <div><button type="button" onclick="affSemblable()">Semblable!!</button></div>
-</div>
+    <div class="parent">
+        <div class="div1 carrepreview" id="couleurSemblableMoins"><p>Semblable Gauche</p></div>
+        <div class="div2 carrepreview" id="pr1" data-jscolor="{previewElement:'#pr1', preset: 'dark', value:'rgb(170,80,30)', onInput: 'affComplementaire()'}" ><p>Référence</p></div>
+        <div class="div3 carrepreview" id="couleurSemblablePlus"><p>Semblable Droite</p></div>
+    </div>
+
 </body>
 </html>
