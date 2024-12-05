@@ -12,27 +12,56 @@ if (mysqli_connect_errno())
 
 $sqlresetrefversion = "UPDATE refversion set refencours = ''";
 $sqlupdateversion = "UPDATE refversion set refencours = 'X' where idversion = " . $reqidVersion;
+$sqlselectinfoversion = "SELECT * from refversion where idversion = " . $reqidVersion;
 
 try {
     $resetrefversion = $con->query($sqlresetrefversion);  
-  } catch (mysqli_sql_exception $e) { echo "probleme !!" . $e; return false; }
+  } catch (mysqli_sql_exception $e) { echo "probleme !! Suppression indicateur version en cours" . $e; return false; }
 
-  try {
+try {
     $updateversion = $con->query($sqlupdateversion);  
-  } catch (mysqli_sql_exception $e) { echo "probleme !!" . $e; return false; }
+  } catch (mysqli_sql_exception $e) { echo "probleme !! Création indicateur version activée" . $e; return false; }
+
+try {
+$selectinfoversion = $con->query($sqlselectinfoversion);  
+} catch (mysqli_sql_exception $e) { echo "probleme !! Select information nom des tables couleur_x et image_x" . $e; return false; }
 
 
-  $sqlListeVersion = "SELECT * FROM refversion";
-  $ListeVersion = $con->query($sqlListeVersion);
-  
-  echo "<table>
-  <tr>
-  <th>Activée</th>
-  <th>Version</th>
-  <th>Date</th>
-  <th>Action</th>
-  </tr>";
-  while($row = mysqli_fetch_array($ListeVersion)) {
+// Tournus des deux vues pour qu'elles pointent sur la nouvelle version choisie
+// Suppression des vues existantes
+$sqldropviewCouleur = "DROP VIEW couleur";
+$sqldropviewImage = "DROP VIEW image";
+if ($con->query($sqldropviewCouleur) === FALSE) {
+    echo "Error: Suppression de la view COULEUR" . $con->error; }
+if ($con->query($sqldropviewImage) === FALSE) {
+    echo "Error: Duplication de la table IMAGE" . $con->error; }
+
+// Récupération des informations des tables concernées ou il faut faire pointer les vues
+$rowinfotableversion = mysqli_fetch_array($selectinfoversion);
+$tablesourcecouleur = $rowinfotableversion['refcouleurv'];
+$tablesourceimage = $rowinfotableversion['refimagev'];
+
+// Création des vues avec la nouvelle version choisie : couleur_vXX et imange_vXX
+$sqlcreateviewCouleur = "CREATE OR REPLACE VIEW couleur as select * from ". $tablesourcecouleur;
+$sqlcreateviewImage = "CREATE OR REPLACE VIEW image as select * from " . $tablesourceimage;
+if ($con->query($sqlcreateviewCouleur) === FALSE) {
+    echo "Error: Création de la view COULEUR" . $con->error; }
+if ($con->query($sqlcreateviewImage) === FALSE) {
+    echo "Error: Création de la table IMAGE" . $con->error; }
+
+
+// Refresh de la page appelante avec la liste des tables
+$sqlListeVersion = "SELECT * FROM refversion";
+$ListeVersion = $con->query($sqlListeVersion);
+
+echo "<table>
+<tr>
+<th>Activée</th>
+<th>Version</th>
+<th>Date</th>
+<th>Action</th>
+</tr>";
+while($row = mysqli_fetch_array($ListeVersion)) {
     echo "<tr>";
     echo "<td>";
     if ($row['refencours'] == 'X') { echo "<img src='../img/check_small_transp.png'>"; } 
@@ -45,10 +74,10 @@ try {
       echo "<td>" . "<button class='button' type='button' value=" . $row['idVersion'] . " onclick='activerVersion(this.value)'>Activer</button>" . "<button class='button' type='button' value=" . $row['idVersion'] . " onclick='supprimerVersion(this.value)'>Supprimer</button>" . "</td>";
     }
     echo "</tr>";
-  }
-  echo "</table>";
-    
-  $con->close();
+}
+echo "</table>";
 
-  ?>
+$con->close();
+
+?>
   
