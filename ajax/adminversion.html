@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestion des versions d'images</title>
+    <link href="../css/pickercolor.css" rel="stylesheet">
 
     <script>
         function showVersion() {
@@ -26,15 +27,56 @@
                 document.addEventListener('DOMContentLoaded', f);
             }
         }
+        function activerVersion(idversion){
+            console.log("Activation de la version : " + idversion);
+        }
 
+        function supprimerVersion(idversion){
+            console.log("Suppression de la version : " + idversion);
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+              if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("txtconsole").innerHTML = this.responseText;
+              }
+            };
+            xmlhttp.open("GET","ajxdeleteversion.php?reqidVersion="+idversion,true);
+            xmlhttp.send();
+        }
 
         </script>
+
+<style>
+    table {
+        border-collapse: collapse;
+        width: auto;
+    }
+
+    th,
+    td {
+        border-bottom: 1px solid #ddd;
+        text-align: center;
+        padding: 8px;
+    }
+    th {
+        background-color: #04AA6D;
+        color: white;
+    }
+    tr:hover {
+        background-color: coral;
+    }
+    /*
+    tr:nth-child(even) {
+        background-color: rgb(211, 211, 211);
+    }*/
+
+</style>
 
 </head>
 <body>
     
-<button type="button" onclick="showVersion()">Afficher toutes les versions disponibles</button>
-<div id="txtHint"><span></span></div>
+<!-- <button type="button" onclick="showVersion()">Afficher toutes les versions disponibles</button> -->
+<div id="txtHint" class="container"></div>
+<div id="txtconsole" class="container"></div>
 
 </body>
 </html>
