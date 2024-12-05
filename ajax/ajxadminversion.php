@@ -10,7 +10,6 @@ if (mysqli_connect_errno())
   {   echo "Failed to connect to MySQL: " . mysqli_connect_error();  }
 
 $sqlListeVersion = "SELECT * FROM refversion";
-
 $ListeVersion = $con->query($sqlListeVersion);
 
 echo "<table>
@@ -22,7 +21,9 @@ echo "<table>
 </tr>";
 while($row = mysqli_fetch_array($ListeVersion)) {
   echo "<tr>";
-  echo "<td>" . $row['refencours'] . "</td>";
+  echo "<td>";
+  if ($row['refencours'] == 'X') { echo "<img src='../img/check_small_transp.png'>"; } 
+  echo "</td>";
   echo "<td>" . $row['refversion'] . "</td>";
   echo "<td>" . $row['refdate'] . "</td>";
   if ($row['refencours'] == 'X') {
@@ -33,8 +34,7 @@ while($row = mysqli_fetch_array($ListeVersion)) {
   echo "</tr>";
 }
 echo "</table>";
-
-
+  
 $con->close();
 
 ?>
