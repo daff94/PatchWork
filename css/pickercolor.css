@@ -74,3 +74,18 @@ p {
   .button:active {
     transform: translateY(4px);
   }
+
+  .button-disable {
+    width: 100%;
+    font-style: italic;
+    background-color: #adc5bc; /* Green */
+    border: none;
+    border-radius: 4px;
+    color: white;
+    padding: 15px 32px;
+    margin-top: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+  }

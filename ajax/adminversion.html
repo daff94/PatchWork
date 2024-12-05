@@ -27,8 +27,17 @@
                 document.addEventListener('DOMContentLoaded', f);
             }
         }
+
         function activerVersion(idversion){
             console.log("Activation de la version : " + idversion);
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+              if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("txtHint").innerHTML = this.responseText;
+              }
+            };
+            xmlhttp.open("GET","ajxchangeversion.php?reqidVersion="+idversion,true);
+            xmlhttp.send();
         }
 
         function supprimerVersion(idversion){
