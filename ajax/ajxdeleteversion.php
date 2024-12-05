@@ -41,19 +41,32 @@ $deleteVersion = $con->query($sqldeleteversion);
 
 
 // Refresh du tableau avec toutes les versions actualitées
+$sqlListeVersion = "SELECT * FROM refversion";
+$ListeVersion = $con->query($sqlListeVersion);
+
 echo "<table>
 <tr>
+<th>Activée</th>
 <th>Version</th>
 <th>Date</th>
 <th>Action</th>
 </tr>";
-while($row = mysqli_fetch_array($selectversion)) {
+while($row = mysqli_fetch_array($ListeVersion)) {
   echo "<tr>";
+  echo "<td>";
+  if ($row['refencours'] == 'X') { echo "<img src='../img/check_small_transp.png'>"; } 
+  echo "</td>";
   echo "<td>" . $row['refversion'] . "</td>";
   echo "<td>" . $row['refdate'] . "</td>";
-  echo "<td>" . "<button class='button' type='button' value=" . $row['idVersion'] . " onclick='activerVersion(this.value)'>Activer</button>" . "<button class='button' type='button' value=" . $row['idVersion'] . " onclick='supprimerVersion(this.value)'>Supprimer</button>" . "</td>";
+  if ($row['refencours'] == 'X') {
+    echo "<td>" . "<button class='button-disable' type='button' disabled value=" . $row['idVersion'] . " onclick='activerVersion(this.value)'>Activer</button>" . "<button class='button-disable' type='button' disabled value=" . $row['idVersion'] . " onclick='supprimerVersion(this.value)'>Supprimer</button>" . "</td>";
+  } else {
+    echo "<td>" . "<button class='button' type='button' value=" . $row['idVersion'] . " onclick='activerVersion(this.value)'>Activer</button>" . "<button class='button' type='button' value=" . $row['idVersion'] . " onclick='supprimerVersion(this.value)'>Supprimer</button>" . "</td>";
+  }
   echo "</tr>";
 }
 echo "</table>";
+  
+$con->close();
 
 ?>

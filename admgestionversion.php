@@ -59,10 +59,10 @@ if ($con->query($sqlInsertionImage) === FALSE) {
 if ($con->query($sqlInsertionCouleur) === FALSE) {
     echo "Error: Copie des éléments dans la nouvelle table COULEUR" . $con->error; }
 
-$sqldropviewCouleur = "drop view couleur";
-$sqldropviewImage = "drop view image";
-$sqlcreateviewCouleur = "create or replace view couleur as select * from ". "couleur_" . $version;
-$sqlcreateviewImage = "create or replace view image as select * from image_" . $version;
+$sqldropviewCouleur = "DROP VIEW couleur";
+$sqldropviewImage = "DROP VIEW image";
+$sqlcreateviewCouleur = "CREATE OR REPLACE VIEW couleur as select * from ". "couleur_" . $version;
+$sqlcreateviewImage = "CREATE OR REPLACE VIEW image as select * from image_" . $version;
 
 if ($con->query($sqldropviewCouleur) === FALSE) {
     echo "Error: Suppression de la view COULEUR" . $con->error; }
