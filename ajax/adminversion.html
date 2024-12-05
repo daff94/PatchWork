@@ -36,7 +36,7 @@
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function() {
               if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("txtconsole").innerHTML = this.responseText;
+                document.getElementById("txtHint").innerHTML = this.responseText;
               }
             };
             xmlhttp.open("GET","ajxdeleteversion.php?reqidVersion="+idversion,true);
@@ -76,7 +76,7 @@
     
 <!-- <button type="button" onclick="showVersion()">Afficher toutes les versions disponibles</button> -->
 <div id="txtHint" class="container"></div>
-<div id="txtconsole" class="container"></div>
+
 
 </body>
 </html>

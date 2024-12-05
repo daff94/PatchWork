@@ -17,27 +17,38 @@ $sqldeleteinfo = "SELECT * FROM refversion WHERE idVersion=" . $reqidVersion . "
 $sqlselectversion = "SELECT * FROM refversion WHERE refencours != 'X';";
 
 // DELETE de la version selon id passé
-$sqldeleteversion = "DELETE * FROM refversion WHERE idVersion=" . $reqidVersion . ";";
+$sqldeleteversion = "DELETE FROM refversion WHERE idVersion=" . $reqidVersion . ";";
 
-echo $sqldeleteversion;
 // Exécution de la requete pour avoir des informations sur la version qui sera supprimée
-$selectversion = $con->query($sqlselectversion);
+try {
+  $selectversion = $con->query($sqlselectversion);  
+} catch (mysqli_sql_exception $e) { echo "probleme !!"; return false; }
+
+$row = mysqli_fetch_array($selectversion);
+$nomtableCouleur = $row['refcouleurv'];
+$nomtableImage = $row['refimagev'];
+
+// Instruction SQL pour supprimer les tables Image et Couleur correspondantes à la version choisie.
+$sqltruncateImage = "DROP TABLE " . $nomtableImage;
+$sqltruncateCouleur = "DROP TABLE " . $nomtableCouleur;
+
+// Suppresion des tables correspondantes à la version choisie
+$truncateImage = $con->query($sqltruncateImage);
+$truncateCouleur = $con->query($sqltruncateCouleur);
 
 // Exécution de la requete de suppression de la version séelectionnée
-// $deleteVersion = $con->query($sqldeleteversion);
+$deleteVersion = $con->query($sqldeleteversion);
 
 
 // Refresh du tableau avec toutes les versions actualitées
 echo "<table>
 <tr>
-<th>Version en Cours</th>
 <th>Version</th>
 <th>Date</th>
 <th>Action</th>
 </tr>";
 while($row = mysqli_fetch_array($selectversion)) {
   echo "<tr>";
-  echo "<td>" . $row['refencours'] . "</td>";
   echo "<td>" . $row['refversion'] . "</td>";
   echo "<td>" . $row['refdate'] . "</td>";
   echo "<td>" . "<button class='button' type='button' value=" . $row['idVersion'] . " onclick='activerVersion(this.value)'>Activer</button>" . "<button class='button' type='button' value=" . $row['idVersion'] . " onclick='supprimerVersion(this.value)'>Supprimer</button>" . "</td>";

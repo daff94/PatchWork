@@ -20,14 +20,12 @@ echo "Version utilisée est : " . $row['refversion'] . " du " . $row['refdate'];
 
 echo "<table>
 <tr>
-<th>Version en Cours</th>
 <th>Version</th>
 <th>Date</th>
 <th>Action</th>
 </tr>";
 while($row = mysqli_fetch_array($ListeVersion)) {
   echo "<tr>";
-  echo "<td>" . $row['refencours'] . "</td>";
   echo "<td>" . $row['refversion'] . "</td>";
   echo "<td>" . $row['refdate'] . "</td>";
   echo "<td>" . "<button class='button' type='button' value=" . $row['idVersion'] . " onclick='activerVersion(this.value)'>Activer</button>" . "<button class='button' type='button' value=" . $row['idVersion'] . " onclick='supprimerVersion(this.value)'>Supprimer</button>" . "</td>";
