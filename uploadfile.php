@@ -7,6 +7,23 @@
 */
 echo "<h1>Téléchargement des fichiers</h1>";
 if(isset($_POST["submit"])) {
+
+  if(isset($_POST["chxoption"])) {
+    $chxteleversement = $_POST["chxoption"];
+    switch ($chxteleversement) {
+      case "chxajouter":
+        echo "<h3>On ajouter les nouvelles photos avec l'existant</h3>";
+        break;
+      case "chxecraser":
+        echo "<h3>On supprime l'existant et on remplace</h3>";
+        break;
+    }
+        
+    // if chxteleversement = chxajouter 
+    // on ajoute à la table (vue) courante
+    // sinon il faut la "truncate" avant de la charger
+  }
+
   foreach ($_FILES['fileToUpload']['tmp_name'] as $key => $tmp_name)
     {
     $nameDestination = $_FILES['fileToUpload']['name'][$key];

@@ -10,10 +10,16 @@
 
 <!-- pour la forme CSS et gestion du drag-drop : https://www.youtube.com/watch?v=CaVoNWd-NzU -->
 
+<div class="container">
   <form action="uploadfile.php" method="post" enctype="multipart/form-data">
-    Sélectionnez l'image a télécharger :
+    Sélectionnez le répertoire à télécharger :
     <input type="file" name="fileToUpload[]" id="fileToUpload" multiple>
-    <button type="submit" value="Upload Image" name="submit">Envoyer</button>
-  </form>  
+    <button type="submit" value="Upload Image" name="submit">Téléverser</button>
+    <p>
+      <input type="radio" id="chxajouter" name="chxoption" value="chxajouter" checked/>Compléter la liste avec ceux déjà en base <br>
+      <input type="radio" id="chxajouter" name="chxoption" value="chxecraser" />Ecraser les images existantes <br>
+    </p>
+  </form>
+</div>
 </body>
 </html>
