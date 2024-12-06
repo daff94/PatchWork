@@ -6,24 +6,27 @@
 /* https://stackoverflow.com/questions/2704314/multiple-file-upload-in-php
 */
 echo "<h1>Téléchargement des fichiers</h1>";
-if(isset($_POST["submit"])) {
 
-  if(isset($_POST["chxoption"])) {
-    $chxteleversement = $_POST["chxoption"];
-    switch ($chxteleversement) {
-      case "chxajouter":
-        echo "<h3>On ajouter les nouvelles photos avec l'existant</h3>";
-        break;
-      case "chxecraser":
-        echo "<h3>On supprime l'existant et on remplace</h3>";
-        break;
-    }
-        
-    // if chxteleversement = chxajouter 
-    // on ajoute à la table (vue) courante
-    // sinon il faut la "truncate" avant de la charger
+$con = mysqli_connect("localhost","root","","patchwork");
+
+  if (!$con) {
+      echo "Erreur : Impossible de se connecter à MySQL." . PHP_EOL;
+      echo "Errno de débogage : " . mysqli_connect_errno() . PHP_EOL;
+      echo "Erreur de débogage : " . mysqli_connect_error() . PHP_EOL;
+      exit;
   }
 
+if(isset($_POST["submit"])) {
+  foreach (glob('uploads/*') as $file) {
+    unlink($file);
+  }
+
+  echo "<h3>On supprime l'existant et on remplace</h3>";
+  $sqlSuppImage = "DELETE FROM image";
+  $sqlSuppCouleur = "DELETE FROM couleur";
+  $sqlresultImage = $con->query($sqlSuppImage);
+  $sqlresultCouleur = $con->query($sqlSuppCouleur);
+        
   foreach ($_FILES['fileToUpload']['tmp_name'] as $key => $tmp_name)
     {
     $nameDestination = $_FILES['fileToUpload']['name'][$key];
