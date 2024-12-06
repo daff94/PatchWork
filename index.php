@@ -30,7 +30,7 @@
     <div class="col-4"><img src="images/presentation/mockup03.jpg" class="rounded img-thumbnail" ></div>
   </div>
 </div>  
-</div>  
+
 
   
 <!-- Code pour la fenetre modale - A propos-->

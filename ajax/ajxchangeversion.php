@@ -34,7 +34,7 @@ $sqldropviewImage = "DROP VIEW image";
 if ($con->query($sqldropviewCouleur) === FALSE) {
     echo "Error: Suppression de la view COULEUR" . $con->error; }
 if ($con->query($sqldropviewImage) === FALSE) {
-    echo "Error: Duplication de la table IMAGE" . $con->error; }
+    echo "Error: Suppression de la view IMAGE" . $con->error; }
 
 // Récupération des informations des tables concernées ou il faut faire pointer les vues
 $rowinfotableversion = mysqli_fetch_array($selectinfoversion);
@@ -47,7 +47,7 @@ $sqlcreateviewImage = "CREATE OR REPLACE VIEW image as select * from " . $tables
 if ($con->query($sqlcreateviewCouleur) === FALSE) {
     echo "Error: Création de la view COULEUR" . $con->error; }
 if ($con->query($sqlcreateviewImage) === FALSE) {
-    echo "Error: Création de la table IMAGE" . $con->error; }
+    echo "Error: Création de la view IMAGE" . $con->error; }
 
 
 // Refresh de la page appelante avec la liste des tables
