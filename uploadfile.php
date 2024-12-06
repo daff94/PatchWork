@@ -17,6 +17,8 @@ $con = mysqli_connect("localhost","root","","patchwork");
   }
 
 if(isset($_POST["submit"])) {
+
+  // On supprime tous les fichiers du répertoire uploads (ancien chargement)
   foreach (glob('uploads/*') as $file) {
     unlink($file);
   }
@@ -39,8 +41,6 @@ if(isset($_POST["submit"])) {
       if (move_uploaded_file($nameTemp, $target_file)) 
         {
         echo "<br>" . "L'image ". $nameDestination . " a été chargé.";
-        // Mettre à jour la table "image" avec ce nouveau fichire
-
         } else {
         echo "<br>" . "Désolé, une erreur s'est produite au chargement des fichiers.";
         $erreurchargement = true;
@@ -49,6 +49,7 @@ if(isset($_POST["submit"])) {
     }
   // Maintenant que tout est dans upload nous pouvons charger les fichiers dans la table IMAGE
   chargementImage();
+  // Afficher toutes les photos chargeés
   afficheimageschargees();
 }
 
