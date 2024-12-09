@@ -1,3 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
+<head>
+	<title>Liste toutes les photos en base</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/tables.css" rel="stylesheet">
+	<link href="css/main.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- Chargement du menu principal du site -->
+<?php include 'menu_principal.html' ?>
+
+<div class="container-fluid" >
+
+    <div>
+      <h1>Chargement des photos</h1>
+    </div>
+
 <?php
 
 
@@ -5,8 +24,6 @@
 /* s'inspirer de l'aide : 
 /* https://stackoverflow.com/questions/2704314/multiple-file-upload-in-php
 */
-echo "<h1>Téléchargement des fichiers</h1>";
-
 $con = mysqli_connect("localhost","root","","patchwork");
 
   if (!$con) {
@@ -28,7 +45,10 @@ if(isset($_POST["submit"])) {
   $sqlSuppCouleur = "DELETE FROM couleur";
   $sqlresultImage = $con->query($sqlSuppImage);
   $sqlresultCouleur = $con->query($sqlSuppCouleur);
-        
+
+  // On compte le nombre de fichiers sélectionnés à téléverser
+  $nbrateleverser=count($_FILES['fileToUpload']['tmp_name']);
+
   foreach ($_FILES['fileToUpload']['tmp_name'] as $key => $tmp_name)
     {
     $nameDestination = $_FILES['fileToUpload']['name'][$key];
@@ -268,3 +288,11 @@ function checkExtensionImage($imageFileType) {
 }
 
 ?>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+
+</body>
+</html>
