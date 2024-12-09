@@ -54,7 +54,7 @@ echo "<table>
 while($row = mysqli_fetch_array($ListeVersion)) {
   echo "<tr>";
   echo "<td>";
-  if ($row['refencours'] == 'X') { echo "<img src='../img/check_small_transp.png'>"; } 
+  if ($row['refencours'] == 'X') { echo "<img class='imgvignette' src='/patchwork/img/check_small_transp.png'>"; } 
   echo "</td>";
   echo "<td>" . $row['refversion'] . "</td>";
   echo "<td>" . $row['refdate'] . "</td>";

@@ -12,7 +12,6 @@
 <?php include 'menu_principal.html' ?>
 
 <div class="container-fluid" >
-
     <div>
       <h1>Chargement des photos</h1>
     </div>
@@ -40,7 +39,7 @@ if(isset($_POST["submit"])) {
     unlink($file);
   }
 
-  echo "<h3>On supprime l'existant et on remplace</h3>";
+  // On supprime les références - RAZ
   $sqlSuppImage = "DELETE FROM image";
   $sqlSuppCouleur = "DELETE FROM couleur";
   $sqlresultImage = $con->query($sqlSuppImage);
@@ -58,10 +57,8 @@ if(isset($_POST["submit"])) {
     $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
     if (checkImageType($nameTemp) == true AND checkFichierExistant($target_file) == false AND checkExtensionImage($imageFileType) == true)
       {
-      if (move_uploaded_file($nameTemp, $target_file)) 
+      if (!move_uploaded_file($nameTemp, $target_file)) 
         {
-        echo "<br>" . "L'image ". $nameDestination . " a été chargé.";
-        } else {
         echo "<br>" . "Désolé, une erreur s'est produite au chargement des fichiers.";
         $erreurchargement = true;
         }
@@ -124,8 +121,14 @@ function dominanteImage() {
   $reduce_brightness=1;
   $reduce_gradients=1;
   
-  echo "Debut calcul - Nombre max de dominante : " . $num_results;
-
+  echo "Paramèters utilisés :";
+  echo "<ul>";
+  echo "<li>Nombre de dominante calculé : " . $num_results ."</li>";
+  echo "<li>Réduction de la brillance (Brightness) : " . $reduce_brightness . "</li>";
+  echo "<li>Réduction des dégradés : " . $reduce_gradients . "</li>";
+  echo "<li>Ecart entre deux dominantes : " . $delta . "</li>";
+  echo "</ul>";
+  
   // Choix de la photo par son ID et r�cup�ration de son chemin et nom de la photo : nomImageTest
   $sql="Select idImage, nomImage, cheminImage from image";
   $result = $con->query($sql);
@@ -135,8 +138,8 @@ function dominanteImage() {
 		$idImageTest=$row["idImage"];
 
 	// recherche des dominantes selon les parametres d�finits plus haut	
-  echo "<br>";
-  echo $nomImageTest, $num_results, $reduce_brightness, $reduce_gradients, $delta;
+  // echo "<br>";
+  // echo $nomImageTest, $num_results, $reduce_brightness, $reduce_gradients, $delta;
 	$colors=$ex->Get_Color($nomImageTest, $num_results, $reduce_brightness, $reduce_gradients, $delta);
 		
     foreach ( $colors as $hex => $count )
@@ -159,15 +162,15 @@ function dominanteImage() {
 
       $sql = "INSERT INTO couleur(extIdImage,hex, pourcentage, rrouge, gvert, bbleu, hteinte, ssaturation, lluminance) VALUES ($idImageTest,'$hex', $pourcentage, $colorRGB[0], $colorRGB[1],$colorRGB[2],$colorHSV[0],$colorHSV[1],$colorHSV[2])";
       
-        if ($con->query($sql) === FALSE) {
-        echo "Error: " . $sql . "<br>" . $con->error; }
+      if ($con->query($sql) === FALSE) {
+      echo "Error: " . $sql . "<br>" . $con->error; }
       
       }
     }
   }
 
   $con->close();
-  echo "Calcul termin� !!!";
+  echo "Traitement terminé.";
 }
 
 
@@ -186,8 +189,8 @@ function afficheimageschargees() {
   $nombreImages = $result->num_rows;
   $nombreColonnes = 4;
 
-  echo "<h1>Liste des images en base</h1>";
-  echo "<h2>Nombre d'images dans la base : " . $nombreImages . " </h2>";
+  echo "<h2>Liste des images en base</h2>";
+  echo "Nombre d'images dans la base : " . $nombreImages;
   echo "<div>";
     $numligne = 0;
     while($row = $result->fetch_assoc()) {
@@ -198,7 +201,7 @@ function afficheimageschargees() {
               $numligne = 0;
             }
       }
-    echo "</div>";
+  echo "</div>";
   $con->close();
 }
 
@@ -214,7 +217,7 @@ function chargementImage() {
   }
   $dir = "./uploads/";
 
-  echo "<h1>Chargement des fichiers en base</h1>";
+  echo "<h2>Chargement des fichiers en base</h2>";
 
   //  si le dossier pointe existe
   if (is_dir($dir)) {
@@ -225,7 +228,7 @@ function chargementImage() {
       while (($file = readdir($dh)) !== false) {
         // affiche le nom et le type si ce n'est pas un element du systeme
         if( $file != '.' && $file != '..' && preg_match('#\.(jpe?g|gif|png)$#i', $file)) {
-          echo "Photo trouvée : " . $dir . $file . "<br>";
+          echo "Photo : " . $dir . $file;
           $phototrouve = file_get_contents($dir . $file);
           $nomPhototrouve = $dir . $file;
           
@@ -242,7 +245,7 @@ function chargementImage() {
           $sql="INSERT INTO image(cheminImage,nomImage,imgphoto,orientation) VALUES ('$dir','$file', " . "'" . addslashes($phototrouve) . "'" . ",$orientation)";
           if ($con->query($sql) === FALSE) {
             echo "Error: " . $sql . "<br>" . $con->error; }
-          echo "Import de la photo" . $dir . $file . " terminée.<br> ";
+          echo " - Import terminée.<br> ";
           
         }
       }
@@ -257,7 +260,7 @@ function chargementImage() {
 function checkImageType($nameTemp) {
   $check = getimagesize($nameTemp);
   if($check !== false) {
-    echo "<br>" . "Le fichier est de type - " . $check["mime"] . ".";
+    // echo "<br>" . "Le fichier est de type - " . $check["mime"] . ".";
     $uploadOk = 1;
   } else {
     echo "<br>" . "Le fichier n'est pas une image.";
@@ -270,7 +273,6 @@ function checkImageType($nameTemp) {
 function checkFichierExistant($target_file) {
   $filexiste = false;
   if (file_exists($target_file)) {
-    echo "<br>" . $target_file;
     echo "<br>" . "Désolé, le fichier image existe déjà sur le serveur.";
     $filexiste = true;
   }
