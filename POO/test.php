@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,12 +10,17 @@
     <?php
     require "connexion.php";
     $connexionBase  = new Connexion("localhost","root","","patchwork");
-    //$connectBase->statusconnect();
-    // var_dump($connexionBase);
-    $connexionBase->lanceSQL("select * from image;");
-    $connexionBase->fermerdatabase();
-    $connexionBase->statusconnect();
+
+    $result = $connexionBase->lanceSQL("select * from image;");
     
+    if ($connexionBase->statusconnect()) {
+        while ($row = mysqli_fetch_array($result)) {
+            echo $row[2];
+        }
+    }   
+   
+    $connexionBase->statusconnect();
+    $connexionBase->fermerdatabase();    
     ?>
 
 </body>
