@@ -8,7 +8,8 @@
     <scipt src="pickercolor.js"></scipt>
     <script src="js/jscolor.js"></script>
     <link href="css/pickercolor.css" rel="stylesheet">
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
     <script type="text/javascript" language="JavaScript">
     // Here we can adjust defaults for all color pickers on page:
     jscolor.presets.default = {
@@ -72,11 +73,9 @@
         }
 
         return [ h, s, v ];
-        }
+    }
 
-
-    function affSemblable()
-    {
+    function affSemblable() {
         // Récupération de la couleur choisi
         const chxColor = document.querySelector('#pr1').getAttribute('data-current-color');
          // data-current-color est au format : rgb(51,153,255)
@@ -108,9 +107,7 @@
         document.querySelector('#couleurSemblableMoins').style.backgroundColor = "rgb("+rvbsemblableMoins[0]+","+rvbsemblableMoins[1]+","+rvbsemblableMoins[2]+")";
     }
 
-
-    function affComplementaire()
-    {
+    function affComplementaire() {
         // Récupération de la couleur choisi
         const chxColor = document.querySelector('#pr1').getAttribute('data-current-color');
          // data-current-color est au format : rgb(51,153,255)
@@ -133,10 +130,15 @@
         affSemblable();
     }
 
-   
     </script> 
+
 </head>
+
 <body>
+
+<!-- Chargement du menu principal du site -->
+<?php include 'menu_principal.html' ?>
+
 <div class="container">
     <div class="carrecomplementaire" id="couleurComplementaire" style="background-color: rgb(85,179,226); "><p>Complémentaire</p></div>
     <div class="parent">
@@ -147,5 +149,7 @@
     <div><button class="button" type="button">Rechercher les photos similaires</button></div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

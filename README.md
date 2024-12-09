@@ -9,14 +9,15 @@ Pas de contenu pour l'instant, la priorité sur le calcul des couleurs cf. #
 - remove ; then restart the server
 
 - [X] Changer la formule HSL
-- [ ] Mettre en place la purge de la base (images -> repertoire corbeille)
+- [X] Mettre en place la purge de la base (images -> repertoire corbeille)
 - [X] Charger les photos : soit sélection répertoire mais le mieux serait "glisser/lacher" pour qu'elle soit intégrée
 - [X] Chargement multiple des photos selon choix utilisateur du répertoire
 - [ ] Ajouter une zone de saisie en HEX pour le choix de la couleur de REFERENCE
 - [ ] Ajouter une case à option (3 choix) pour la finesse THIN / REGULAR / LARGE
 - [ ] Lorsqu'on clique sur une couleur complémentaire/gauche/droite, elle devient la couleur de Référence (et calculer les autres couleurs)
-- [ ] Basculer en AJAX toute la gestion de version et sauvegarde des tables (purge -> base corbeille / images -> rep. corbeille)
-- [ ] Mettre en place le Workflow suivant : upload des nouvelles images -> insertion en base (choix de version) -> Lancement de la recherche des dominantes
+- [X] Basculer en AJAX toute la gestion de version et sauvegarde des tables (purge -> base corbeille / images -> rep. corbeille)
+- [X] Mettre en place le Workflow suivant : upload des nouvelles images -> insertion en base (choix de version) -> Lancement de la recherche des dominantes
+- [ ] Lorsqu'on charge de nouveau fichier, on créé une nouvelle version des tables "image/couleur"
 
 
 ## Tips
@@ -26,22 +27,6 @@ Lorsqu'on recherche une couleur avec une roue chromatique (ou input=color) (http
 - THIN : précis par rapport à la recherche (très peu de marge)
 - REGULAR : juste un peu plus au tour (valuer par défaut)
 - LARGE : on déborde et on rammasse un max de correspondance meme si on s'en éloigne un peu.
-
-
-### Verisonning des ensembles image/couleur
-AJAX : https://www.w3schools.com/php/php_ajax_database.asp
-Création de la partie tehcnique en base 
-CREATE TABLE image_vX LIKE refimage;
-INSERT INTO image_vX SELECT * FROM image;
-Activation : faire pointer les Views Image/Couleur vers image_x/couleur_x précédement créées
-
-DROP TABLE image_vX.
-Le faire pour le couple image/couleur.
-- [ ] Il faut mettre en place l'IHM Web
-- [ ] Afficher l'ensemble des versions en base
-- [ ] un bouton par version trouvée et lancer la suppression version par version (prefixe "archive_")
-- [ ] Mise en place d'une corbeille
-- [ ] Déplacement des fichiers correspondants dans un répertoire "corbeille"
 
 
 ## ARCHIVES
@@ -76,6 +61,20 @@ Tester l'algorithme qui permettra de se rapprocher de Photoshop et sa roue chrom
 Possibilité d'avoir la couleur complémentaire, mais également des couleurs similaires sur le cercles chromatique
 Actuellement le choix est fait via une box, puis nous aurons le remplissage de cadre avec la couleur complémentaire (en place) et les couleurs semblables (en cours)
 Pour les couleurs semblables, actuellement nous en avons deux espacées de 30° par rapport a la couleur choisie. A voir pour créer un algo pour X couleurs semblables avec un degré d'ecart paramètrable.
+
+- 09.12.2024
+Verisonning des ensembles image/couleur
+AJAX : https://www.w3schools.com/php/php_ajax_database.asp
+Création de la partie tehcnique en base 
+CREATE TABLE image_vX LIKE refimage;
+INSERT INTO image_vX SELECT * FROM image;
+Activation : faire pointer les Views Image/Couleur vers image_x/couleur_x précédement créées
+
+DROP TABLE image_vX.
+Le faire pour le couple image/couleur.
+- [X] Il faut mettre en place l'IHM Web
+- [X] Afficher l'ensemble des versions en base
+- [X] un bouton par version trouvée et lancer la suppression version par version (prefixe "archive_")
 
 
 ## DOCUMENTATIONS
