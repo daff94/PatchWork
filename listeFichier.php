@@ -9,10 +9,9 @@ if (!$con) {
     exit;
 }
 
-$dir = "./images/";
+$dir = "./uploads/";
 //  si le dossier pointe existe
 if (is_dir($dir)) {
-
    // si il contient quelque chose
    if ($dh = opendir($dir)) {
 
@@ -33,8 +32,7 @@ if (is_dir($dir)) {
 					// Paysage
 					$orientation = 0;
 				}
-				
-				
+		
 				$sql="INSERT INTO image(cheminImage,nomImage,imgphoto,orientation) VALUES ('$dir','$file', " . "'" . addslashes($phototrouve) . "'" . ",$orientation)";
 				if ($con->query($sql) === FALSE) {
 					echo "Error: " . $sql . "<br>" . $con->error; }
@@ -49,7 +47,7 @@ if (is_dir($dir)) {
 
 // Lecture dans la base des images, directement stokées en base et non pas des chemins.
 
-$sql="SELECT cheminImage,nomImage,photo FROM image";
+$sql="SELECT cheminImage,nomImage,imgphoto FROM image";
 $result = $con->query($sql);
 
 if ($result->num_rows > 0) {

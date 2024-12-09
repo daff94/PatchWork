@@ -1,7 +1,6 @@
 <?php
 
-function hex2rgb($color)
-{
+function hex2rgb($color) {
 	$r = hexdec(substr($color,0,2));
     $g = hexdec(substr($color,2,2));
     $b = hexdec(substr($color,4,2));							 

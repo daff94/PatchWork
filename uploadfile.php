@@ -68,18 +68,20 @@ function afficheimageschargees() {
   $nombreImages = $result->num_rows;
   $nombreColonnes = 4;
 
-  $tout = $result->fetch_array();
-
   echo "<h1>Liste des images en base</h1>";
-    $numligne = 1;
+  echo "<h2>Nombre d'images dans la base : " . $nombreImages . " </h2>";
+  echo "<div>";
+    $numligne = 0;
     while($row = $result->fetch_assoc()) {
         $numligne = $numligne + 1;
             echo "<img style='border-radius: 10px; width:25%' src='" . "data:image/jpeg;base64," . base64_encode($row['imgphoto']) . "'/>";
             if ($numligne > $nombreColonnes) {
               echo "<br>";
-              $numligne = 1;
+              $numligne = 0;
             }
       }
+    echo "</div>";
+  $con->close();
 }
 
 
