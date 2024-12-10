@@ -140,16 +140,18 @@
         const r = deci[0];
         const g = deci[1];
         const b = deci[2];
-        console.log("couleur de ref RGB : " + deci);
+        // console.log("couleur de ref RGB : " + deci);
         // Transformation RGB -> HSV
         hsv = rgbToHsv_min(r, g, b);
-        console.log(hsv);
+        // console.log(hsv);
         const tdegre = Math.round(hsv[0] * 360);
         const spourc = Math.round(hsv[1] * 100);
         const lpourc = Math.round(hsv[2] * 100);
+        /*
         console.log("En degré : " + tdegre);
         console.log("En Pourcentage Saturation : " + spourc);
         console.log("En pourcentage Luminance : " + lpourc);
+        */
         // Récupérer l'option de choix de la tolérance
         chxToleranceTiny = document.querySelector('#Tiny').checked
         chxToleranceRegular = document.querySelector('#Regular').checked
@@ -224,14 +226,14 @@
 
     <div class="parent">
         <div class="div1 carretolerance" id="toleranceMOINS"></div>
-        <fieldset>
-            <input class="div2 form-check-input"type="radio" id="Tiny" name="chxtolerance" />
-            <label class="div2 form-check-label"for="Tiny">Tiny</label>
-            <input class="div2 form-check-input"type="radio" id="Regular" name="chxtolerance" checked/>
-            <label class="div2 form-check-label"for="Regular">Regular</label>
-            <input class="div2 form-check-input"type="radio" id="Large" name="chxtolerance" />
-            <label class="div2 form-check-label"for="Large">Large</label>
-        </fieldset>
+        <div class="div2">
+            <input class="form-check-input"type="radio" id="Tiny" name="chxtolerance" />
+            <label class="form-check-label"for="Tiny">Tiny</label>
+            <input class="form-check-input"type="radio" id="Regular" name="chxtolerance" checked/>
+            <label class="form-check-label"for="Regular">Regular</label>
+            <input class="form-check-input"type="radio" id="Large" name="chxtolerance" />
+            <label class="form-check-label"for="Large">Large</label>
+        </div>
         <div class="div3 carretolerance" id="tolerancePLUS"></div>
     </div>
     <div><button class="button" type="button">Rechercher les photos similaires</button></div>
