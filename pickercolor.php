@@ -130,6 +130,27 @@
         affSemblable();
     }
 
+
+    function chxsemblablemoins() {
+        // Récupération de la couleur de la case selectionnée
+        chxColor = document.querySelector('#couleurSemblableMoins').style.backgroundColor
+        // On sépare le mot "rgb(...)"
+        const deci = chxColor.replace("rgb(", "").replace(")", "").split(",");
+        const r = deci[0];
+        const g = deci[1];
+        const b = deci[2];
+        // Transformation RGB -> HSV
+        hsv = rgbToHsv_min(r, g, b);
+        const tdegre = Math.round(hsv[0] * 360);
+        const spourc = Math.round(hsv[1] * 100);
+        const lpourc = Math.round(hsv[2] * 100);
+        // Récupérer l'option de choix de la tolérance
+        chxTolerance = document.querySelector('#Tiny').checked
+        // Calcul la fourchette de tolérance pour la Teinte mais certainement pour les autres (à tester).
+        // Lancer la recherche des photos selon la sélection de couleur et la tolérance appliquée.
+        // Afficher en grille l'ensemble des images sélectionnées.
+    }
+
     </script> 
 
 </head>
@@ -142,11 +163,21 @@
 <div class="container">
     <div class="carrecomplementaire" id="couleurComplementaire" onclick="console.log('testComplentaire');" style="background-color: rgb(85,179,226); "><p>Complémentaire</p></div>
     <div class="parent">
-        <div class="div1 carrepreview" id="couleurSemblableMoins" onclick="console.log('testSemblableMoins');"><p>Semblable Gauche</p></div>
+        <div class="div1 carrepreview" id="couleurSemblableMoins" style="background-color: rgb(166, 32, 30);" onclick="chxsemblablemoins();"><p>Semblable Gauche</p></div>
         <div class="div2 reference" id="pr1" data-jscolor="{previewElement:'#pr1', preset: 'dark', value:'rgb(170,80,30)', onInput: 'affComplementaire()'}" ><p>Référence</p></div>
-        <div class="div3 carrepreview" id="couleurSemblablePlus" onclick="console.log('testemblablePlus');"><p>Semblable Droite</p></div>
+        <div class="div3 carrepreview" id="couleurSemblablePlus" style="background-color: rgb(166, 123, 30);" onclick="console.log('testemblablePlus');"><p>Semblable Droite</p></div>
     </div>
     <div><button class="button" type="button">Rechercher les photos similaires</button></div>
+    <div class="mx-auto" style="width: 200px" >
+        <fieldset>
+            <input class="form-check-input"type="radio" id="Tiny" name="chxtolerance" checked />
+            <label class="form-check-label"for="Tiny">Tiny</label>
+            <input class="form-check-input"type="radio" id="Regular" name="chxtolerance" />
+            <label class="form-check-label"for="Regular">Regular</label>
+            <input class="form-check-input"type="radio" id="Large" name="chxtolerance" />
+            <label class="form-check-label"for="Large">Large</label>
+        </fieldset>
+    </div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
