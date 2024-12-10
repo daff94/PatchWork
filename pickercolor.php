@@ -128,25 +128,79 @@
         // const chxColor = document.querySelector('#pr1').getAttribute('data-current-color');
         document.querySelector('#couleurComplementaire').style.backgroundColor = "rgb("+cr+","+cg+","+cb+")";
         affSemblable();
+        chxRefTolerance();
     }
 
 
-    function chxsemblablemoins() {
+    function chxRefTolerance() {
         // Récupération de la couleur de la case selectionnée
-        chxColor = document.querySelector('#couleurSemblableMoins').style.backgroundColor
+        const chxColor = document.querySelector('#pr1').getAttribute('data-current-color');
         // On sépare le mot "rgb(...)"
         const deci = chxColor.replace("rgb(", "").replace(")", "").split(",");
         const r = deci[0];
         const g = deci[1];
         const b = deci[2];
+        console.log("couleur de ref RGB : " + deci);
         // Transformation RGB -> HSV
         hsv = rgbToHsv_min(r, g, b);
+        console.log(hsv);
         const tdegre = Math.round(hsv[0] * 360);
         const spourc = Math.round(hsv[1] * 100);
         const lpourc = Math.round(hsv[2] * 100);
+        console.log("En degré : " + tdegre);
+        console.log("En Pourcentage Saturation : " + spourc);
+        console.log("En pourcentage Luminance : " + lpourc);
         // Récupérer l'option de choix de la tolérance
-        chxTolerance = document.querySelector('#Tiny').checked
+        chxToleranceTiny = document.querySelector('#Tiny').checked
+        chxToleranceRegular = document.querySelector('#Regular').checked
+        chxToleranceLarge = document.querySelector('#Large').checked
+        
+        if (chxToleranceTiny) {
+            ttolerance = 10; // 10 degrés sur le cercle chromatique
+            stolerance = 0.1; // 10% sur la saturation
+            ltolerance = 0.1; // 10% sur la luminance
+        };
+        if (chxToleranceRegular) {
+            ttolerance = 20; // 20 degrés sur le cercle chromatique
+            stolerance = 0.2; // 20% sur la saturation
+            ltolerance = 0.2; // 20% sur la luminance
+        };
+        if (chxToleranceLarge) {
+            ttolerance = 30; // 30 degrés sur le cercle chromatique
+            stolerance = 0.4; // 40% sur la saturation
+            ltolerance = 0.4; // 40% sur la luminance
+        };
+
         // Calcul la fourchette de tolérance pour la Teinte mais certainement pour les autres (à tester).
+        // Augmentation de 10 degré sur le cercle chromatique
+        let tdegreplus = Math.round((hsv[0] + (ttolerance/360)) * 360);
+        let tdegremoins = Math.round((hsv[0] - (ttolerance/360)) * 360);
+        // Augmentation de 20%
+        let spourcplus = Math.round((hsv[1] + stolerance) * 100);
+        let spourcmoins = Math.round((hsv[1] - stolerance) * 100);
+        let lpourcplus = Math.round((hsv[2] + ltolerance) * 100);
+        let lpourcmoins = Math.round((hsv[2] - ltolerance) * 100);
+
+        // Gestion des limites
+        // pour les degres
+        if (tdegreplus > 359) { tdegreplus = 359; }
+        if (tdegremoins < 0) { tdegremoins = 1; }
+        // pour les pourcentages
+        if (spourcplus >= 100) { spourcplus = 100; }
+        if (spourcmoins <= 0) { spourcmoins = 1; }
+        if (lpourcplus >= 100) { lpourcplus = 100; }
+        if (lpourcmoins <= 0){ lpourcmoins = 1; }
+        
+        const hsvTolerancePlus = [tdegreplus / 360, spourcplus / 100, lpourcplus / 100];
+        const hsvToleranceMoins = [tdegremoins / 360, spourcmoins / 100, lpourcmoins / 100];
+
+        let rgbtolerancePlus = hsvToRgb_min(hsvTolerancePlus[0], hsvTolerancePlus[1], hsvTolerancePlus[2]);
+        let rgbtoleranceMoins = hsvToRgb_min(hsvToleranceMoins[0],hsvToleranceMoins[1],hsvToleranceMoins[2]);
+
+        document.querySelector('#tolerancePLUS').style.backgroundColor = "rgb("+rgbtolerancePlus[0]+","+rgbtolerancePlus[1]+","+rgbtolerancePlus[2]+")";
+        document.querySelector('#toleranceMOINS').style.backgroundColor = "rgb("+rgbtoleranceMoins[0]+","+rgbtoleranceMoins[1]+","+rgbtoleranceMoins[2]+")";
+                
+
         // Lancer la recherche des photos selon la sélection de couleur et la tolérance appliquée.
         // Afficher en grille l'ensemble des images sélectionnées.
     }
@@ -163,21 +217,24 @@
 <div class="container">
     <div class="carrecomplementaire" id="couleurComplementaire" onclick="console.log('testComplentaire');" style="background-color: rgb(85,179,226); "><p>Complémentaire</p></div>
     <div class="parent">
-        <div class="div1 carrepreview" id="couleurSemblableMoins" style="background-color: rgb(166, 32, 30);" onclick="chxsemblablemoins();"><p>Semblable Gauche</p></div>
-        <div class="div2 reference" id="pr1" data-jscolor="{previewElement:'#pr1', preset: 'dark', value:'rgb(170,80,30)', onInput: 'affComplementaire()'}" ><p>Référence</p></div>
-        <div class="div3 carrepreview" id="couleurSemblablePlus" style="background-color: rgb(166, 123, 30);" onclick="console.log('testemblablePlus');"><p>Semblable Droite</p></div>
+        <div class="div1 carrepreview" id="couleurSemblableMoins" style="background-color: rgb(166, 32, 30);" onclick="console.log('testsemblableMoins');"><p>Semblable Gauche</p></div>
+        <div class="div2 reference" id="pr1" onclick="console.log('Click sur Référence');" data-jscolor="{previewElement:'#pr1', preset: 'dark', value:'rgb(170,80,30)', onInput: 'affComplementaire()'}" ><p>Référence</p></div>
+        <div class="div3 carrepreview" id="couleurSemblablePlus" style="background-color: rgb(166, 123, 30);" onclick="console.log('testsemblablePlus');"><p>Semblable Droite</p></div>
+    </div>
+
+    <div class="parent">
+        <div class="div1 carretolerance" id="toleranceMOINS"></div>
+        <fieldset>
+            <input class="div2 form-check-input"type="radio" id="Tiny" name="chxtolerance" />
+            <label class="div2 form-check-label"for="Tiny">Tiny</label>
+            <input class="div2 form-check-input"type="radio" id="Regular" name="chxtolerance" checked/>
+            <label class="div2 form-check-label"for="Regular">Regular</label>
+            <input class="div2 form-check-input"type="radio" id="Large" name="chxtolerance" />
+            <label class="div2 form-check-label"for="Large">Large</label>
+        </fieldset>
+        <div class="div3 carretolerance" id="tolerancePLUS"></div>
     </div>
     <div><button class="button" type="button">Rechercher les photos similaires</button></div>
-    <div class="mx-auto" style="width: 200px" >
-        <fieldset>
-            <input class="form-check-input"type="radio" id="Tiny" name="chxtolerance" checked />
-            <label class="form-check-label"for="Tiny">Tiny</label>
-            <input class="form-check-input"type="radio" id="Regular" name="chxtolerance" />
-            <label class="form-check-label"for="Regular">Regular</label>
-            <input class="form-check-input"type="radio" id="Large" name="chxtolerance" />
-            <label class="form-check-label"for="Large">Large</label>
-        </fieldset>
-    </div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
