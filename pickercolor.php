@@ -153,31 +153,41 @@
         console.log("En pourcentage Luminance : " + lpourc);
         */
         // Récupérer l'option de choix de la tolérance
-        chxToleranceTiny = document.querySelector('#Tiny').checked
-        chxToleranceRegular = document.querySelector('#Regular').checked
-        chxToleranceLarge = document.querySelector('#Large').checked
+        chxToleranceTiny = document.querySelector('#Tiny').checked;
+        chxToleranceRegular = document.querySelector('#Regular').checked;
+        chxToleranceLarge = document.querySelector('#Large').checked;
+        chxCouleurOnly = document.querySelector('#chxcouleurOnly').checked;
         
+        let ttolerance = 0;
+        let stolerance = 0;
+        let ltolerance = 0;
+
         if (chxToleranceTiny) {
-            ttolerance = 10; // 10 degrés sur le cercle chromatique
+            ttolerance = 10;  // degrés sur le cercle chromatique
             stolerance = 0.1; // 10% sur la saturation
             ltolerance = 0.1; // 10% sur la luminance
-        };
+        }
         if (chxToleranceRegular) {
-            ttolerance = 20; // 20 degrés sur le cercle chromatique
+            ttolerance = 20;  // degrés sur le cercle chromatique
             stolerance = 0.2; // 20% sur la saturation
             ltolerance = 0.2; // 20% sur la luminance
-        };
+        }
         if (chxToleranceLarge) {
-            ttolerance = 30; // 30 degrés sur le cercle chromatique
+            ttolerance = 60;  // degrés sur le cercle chromatique
             stolerance = 0.4; // 40% sur la saturation
             ltolerance = 0.4; // 40% sur la luminance
-        };
+        }
+        // Si le choix est couleur uniquement on supprime les tolerances pour la saturation et luminance
+        if (chxCouleurOnly == true) {
+            stolerance = 0;
+            ltolerance = 0;
+        }
 
         // Calcul la fourchette de tolérance pour la Teinte mais certainement pour les autres (à tester).
-        // Augmentation de 10 degré sur le cercle chromatique
+        // Tolerance appliquée sur le cercle chromatique
         let tdegreplus = Math.round((hsv[0] + (ttolerance/360)) * 360);
         let tdegremoins = Math.round((hsv[0] - (ttolerance/360)) * 360);
-        // Augmentation de 20%
+        // Tolérance appliquée sur Saturation et Luminance
         let spourcplus = Math.round((hsv[1] + stolerance) * 100);
         let spourcmoins = Math.round((hsv[1] - stolerance) * 100);
         let lpourcplus = Math.round((hsv[2] + ltolerance) * 100);
@@ -227,12 +237,14 @@
     <div class="parent">
         <div class="div1 carretolerance" id="toleranceMOINS"></div>
         <div class="div2">
-            <input class="form-check-input"type="radio" id="Tiny" name="chxtolerance" />
-            <label class="form-check-label"for="Tiny">Tiny</label>
-            <input class="form-check-input"type="radio" id="Regular" name="chxtolerance" checked/>
-            <label class="form-check-label"for="Regular">Regular</label>
-            <input class="form-check-input"type="radio" id="Large" name="chxtolerance" />
-            <label class="form-check-label"for="Large">Large</label>
+            <input class="form-check-input" type="radio" id="Tiny" name="chxtolerance" />
+            <label class="form-check-label" for="Tiny">Tiny</label>
+            <input class="form-check-input" type="radio" id="Regular" name="chxtolerance" checked/>
+            <label class="form-check-label" for="Regular">Regular</label>
+            <input class="form-check-input" type="radio" id="Large" name="chxtolerance" />
+            <label class="form-check-label" for="Large">Large</label>
+            <input class="form-check-input" type="checkbox" id="chxcouleurOnly" name="chxcouleurOnly" />
+            <label class="form-check-label" for="chxcouleurOnly">Couleurs</label>
         </div>
         <div class="div3 carretolerance" id="tolerancePLUS"></div>
     </div>
