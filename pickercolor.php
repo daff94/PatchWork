@@ -75,16 +75,15 @@
         return [ h, s, v ];
     }
 
-    function affSemblable() {
+    function affSemblable(chxColor) {
         // Récupération de la couleur choisi
-        const chxColor = document.querySelector('#pr1').getAttribute('data-current-color');
+        // const chxColor = document.querySelector('#pr1').getAttribute('data-current-color');
          // data-current-color est au format : rgb(51,153,255)
         const delta = 20;
         const deci = chxColor.replace("rgb(", "").replace(")", "").split(",");
         const r = deci[0];
         const g = deci[1];
         const b = deci[2];
-        // console.log("Couleur sélectionnée en RGB : " + deci);
         const hsv = rgbToHsv_min(r,g,b);
         // Après la conversion on remet les valeurs correspondantes à la roue Chromatique
         // https://fr.wikipedia.org/wiki/Cercle_chromatique#/media/Fichier:CYM_color_wheel.png
@@ -107,10 +106,9 @@
         document.querySelector('#couleurSemblableMoins').style.backgroundColor = "rgb("+rvbsemblableMoins[0]+","+rvbsemblableMoins[1]+","+rvbsemblableMoins[2]+")";
     }
 
-    function affComplementaire() {
+    function affComplementaire(chxColor) {
         // Récupération de la couleur choisi
-        const chxColor = document.querySelector('#pr1').getAttribute('data-current-color');
-        // data-current-color est au format : rgb(51,153,255)
+        // chxColor est au format : rgb(51,153,255)
         const deci = chxColor.replace("rgb(", "").replace(")", "").split(",");
         const r = deci[0];
         const g = deci[1];
@@ -127,14 +125,14 @@
         */
         // const chxColor = document.querySelector('#pr1').getAttribute('data-current-color');
         document.querySelector('#couleurComplementaire').style.backgroundColor = "rgb("+cr+","+cg+","+cb+")";
-        affSemblable();
-        chxRefTolerance();
+        affSemblable(chxColor);
+        chxRefTolerance(chxColor);
     }
 
 
-    function chxRefTolerance() {
+    function chxRefTolerance(chxColor) {
         // Récupération de la couleur de la case selectionnée
-        const chxColor = document.querySelector('#pr1').getAttribute('data-current-color');
+        // const chxColor = document.querySelector('#pr1').getAttribute('data-current-color');
         // On sépare le mot "rgb(...)"
         const deci = chxColor.replace("rgb(", "").replace(")", "").split(",");
         const r = deci[0];
@@ -249,7 +247,8 @@
     <div class="carrecomplementaire" id="couleurComplementaire" style="background-color: rgb(85,179,226);" onclick="switchcolor(this);"><p>Complémentaire</p></div>
     <div class="parent">
         <div class="div1 carrepreview" id="couleurSemblableMoins" style="background-color: rgb(166, 32, 30);" onclick="switchcolor(this);"></div>
-        <div class="div2 reference" id="pr1" data-jscolor="{previewElement:'#pr1', preset: 'dark', value:'rgb(170,80,30)', onInput: 'affComplementaire()'}" ><p>Référence</p></div>
+        <div class="div2 reference" id="pr1" ><p>Référence</p></div>
+        
         <div class="div3 carrepreview" id="couleurSemblablePlus" style="background-color: rgb(166, 123, 30);" onclick="switchcolor(this);"></div>
     </div>
 
@@ -270,7 +269,33 @@
     <div><button class="button" type="button" onclick="rechercheImages();">Rechercher les photos similaires</button></div>
 </div>
 
+
+
+<p>
+    For text INPUTS, you can keep with classic HTML attributes:
+    <input id="chxcouleurtxt" value="CCFFAA" oninput="update(this.jscolor, '#pr1')" data-jscolor="{previewElement:'#pr1'}">
+</p>
+
+<script>
+// onChange="update(this.jscolor, '#pr1')" onInput="affComplementaire()"
+function update(picker, selector) {
+    // document.querySelector(selector).style.background = picker.toBackground();
+    affComplementaire(picker.toRGBString());
+}
+
+
+</script>
+
+
+
+
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+
+
+
+
 </body>
 </html>
