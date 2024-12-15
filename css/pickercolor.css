@@ -1,8 +1,12 @@
 
+.mybody {
+  background-color: #d4d4d4;
+}
+
 .carrepreview, .carrecomplementaire  { 
     text-align: center;
     height: 100px;
-    border: 2px solid black;
+    border: 2px solid rgb(190, 190, 190);
     padding: 5px;
     margin-top: 5px;
     border-radius: 5px;
@@ -13,7 +17,7 @@
 .carretolerance {
   text-align: center;
   height: 25px;
-  border: 2px solid black;
+  border: 2px solid rgb(190, 190, 190);
   padding: 5px;
   margin-top: 5px;
   border-radius: 5px;
@@ -21,14 +25,14 @@
   /* box-shadow: 5px 5px 5px rgb(80, 80, 80); */
 }
 
-.carrepreview:hover, .carrecomplementaire:hover {
-    box-shadow: 5px 5px 5px rgb(80, 80, 80);
+.carrepreview:hover, .carrecomplementaire:hover, .reference:hover {
+    box-shadow: 3px 3px 3px rgb(143, 143, 143);
 }
 
 .reference {
     text-align: center;
     height: 100px;
-    border: 2px solid black;
+    border: 2px solid rgb(190, 190, 190);
     padding: 5px;
     margin-top: 5px;
     margin-left: 5px;
@@ -38,7 +42,7 @@
 }
 
 .reference:hover {
-    box-shadow: 5px 5px 5px rgb(80, 80, 80);
+    box-shadow: 3px 3px 3px rgb(143, 143, 143);
 }
 
 p {

@@ -217,6 +217,18 @@
         // Afficher en grille l'ensemble des images sélectionnées.
     }
 
+    function switchcolor(idClick) {
+        // Récupération de la couleur "cliquée"
+        idSource = "#" + idClick.id;
+        const chxColor = document.querySelector(idSource).style.backgroundColor;
+        // Mise à jour du DIV de Référence
+        document.querySelector('#pr1').style.backgroundImage = "linear-gradient(to right, " + chxColor + " 0%, " + chxColor + " 100%)";
+        // document.querySelector('#pr1').style.backgroundImage = chxColor;
+
+        // document.querySelector('#pr1').setAttribute('data-current-color',chxColor);
+       //  document.querySelector('#pr1').setAttribute('data-jscolor','value: ' + chxColor);
+    }
+
     </script> 
 
 </head>
@@ -227,15 +239,15 @@
 <?php include 'menu_principal.html' ?>
 
 <div class="container">
-    <div class="carrecomplementaire" id="couleurComplementaire" onclick="console.log('testComplentaire');" style="background-color: rgb(85,179,226); "><p>Complémentaire</p></div>
+    <div class="carrecomplementaire" id="couleurComplementaire" style="background-color: rgb(85,179,226);" onclick="switchcolor(this);"><p>Complémentaire</p></div>
     <div class="parent">
-        <div class="div1 carrepreview" id="couleurSemblableMoins" style="background-color: rgb(166, 32, 30);" onclick="console.log('testsemblableMoins');"><p>Semblable Gauche</p></div>
+        <div class="div1 carrepreview" id="couleurSemblableMoins" style="background-color: rgb(166, 32, 30);" onclick="console.log('testsemblableMoins');"></div>
         <div class="div2 reference" id="pr1" onclick="console.log('Click sur Référence');" data-jscolor="{previewElement:'#pr1', preset: 'dark', value:'rgb(170,80,30)', onInput: 'affComplementaire()'}" ><p>Référence</p></div>
-        <div class="div3 carrepreview" id="couleurSemblablePlus" style="background-color: rgb(166, 123, 30);" onclick="console.log('testsemblablePlus');"><p>Semblable Droite</p></div>
+        <div class="div3 carrepreview" id="couleurSemblablePlus" style="background-color: rgb(166, 123, 30);" onclick="console.log('testsemblablePlus');"></div>
     </div>
 
     <div class="parent">
-        <div class="div1 carretolerance" id="toleranceMOINS"></div>
+        <div class="div1 carretolerance" id="toleranceMOINS" onclick="switchcolor(this);"></div>
         <div class="div2">
             <input class="form-check-input" type="radio" id="Tiny" name="chxtolerance" />
             <label class="form-check-label" for="Tiny">Tiny</label>
@@ -246,7 +258,7 @@
             <input class="form-check-input" type="checkbox" id="chxcouleurOnly" name="chxcouleurOnly" />
             <label class="form-check-label" for="chxcouleurOnly">Couleurs</label>
         </div>
-        <div class="div3 carretolerance" id="tolerancePLUS"></div>
+        <div class="div3 carretolerance" id="tolerancePLUS" onclick="switchcolor(this);"></div>
     </div>
     <div><button class="button" type="button">Rechercher les photos similaires</button></div>
 </div>
