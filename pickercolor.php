@@ -110,7 +110,7 @@
     function affComplementaire() {
         // Récupération de la couleur choisi
         const chxColor = document.querySelector('#pr1').getAttribute('data-current-color');
-         // data-current-color est au format : rgb(51,153,255)
+        // data-current-color est au format : rgb(51,153,255)
         const deci = chxColor.replace("rgb(", "").replace(")", "").split(",");
         const r = deci[0];
         const g = deci[1];
@@ -224,9 +224,16 @@
         // Mise à jour du DIV de Référence
         document.querySelector('#pr1').style.backgroundImage = "linear-gradient(to right, " + chxColor + " 0%, " + chxColor + " 100%)";
         // document.querySelector('#pr1').style.backgroundImage = chxColor;
-
-        // document.querySelector('#pr1').setAttribute('data-current-color',chxColor);
+        document.querySelector('#pr1').style.backgroundColor = chxColor;
+        document.querySelector('#pr1').setAttribute('data-current-color',chxColor);
        //  document.querySelector('#pr1').setAttribute('data-jscolor','value: ' + chxColor);
+
+    }
+
+    function rechercheImages(){
+        // Récupération de la couleur de référence - rgb(xxx,xxx,xxx)
+        const referenceCouleur = document.querySelector('#pr1').getAttribute('data-current-color');
+        console.log(referenceCouleur);
     }
 
     </script> 
@@ -241,9 +248,9 @@
 <div class="container">
     <div class="carrecomplementaire" id="couleurComplementaire" style="background-color: rgb(85,179,226);" onclick="switchcolor(this);"><p>Complémentaire</p></div>
     <div class="parent">
-        <div class="div1 carrepreview" id="couleurSemblableMoins" style="background-color: rgb(166, 32, 30);" onclick="console.log('testsemblableMoins');"></div>
-        <div class="div2 reference" id="pr1" onclick="console.log('Click sur Référence');" data-jscolor="{previewElement:'#pr1', preset: 'dark', value:'rgb(170,80,30)', onInput: 'affComplementaire()'}" ><p>Référence</p></div>
-        <div class="div3 carrepreview" id="couleurSemblablePlus" style="background-color: rgb(166, 123, 30);" onclick="console.log('testsemblablePlus');"></div>
+        <div class="div1 carrepreview" id="couleurSemblableMoins" style="background-color: rgb(166, 32, 30);" onclick="switchcolor(this);"></div>
+        <div class="div2 reference" id="pr1" data-jscolor="{previewElement:'#pr1', preset: 'dark', value:'rgb(170,80,30)', onInput: 'affComplementaire()'}" ><p>Référence</p></div>
+        <div class="div3 carrepreview" id="couleurSemblablePlus" style="background-color: rgb(166, 123, 30);" onclick="switchcolor(this);"></div>
     </div>
 
     <div class="parent">
@@ -260,7 +267,7 @@
         </div>
         <div class="div3 carretolerance" id="tolerancePLUS" onclick="switchcolor(this);"></div>
     </div>
-    <div><button class="button" type="button">Rechercher les photos similaires</button></div>
+    <div><button class="button" type="button" onclick="rechercheImages();">Rechercher les photos similaires</button></div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
