@@ -1,35 +1,35 @@
 # PatchWork
 
-18-11-2024 : Création des deux pages d'administration - Charger et Purger
-Pas de contenu pour l'instant, la priorité sur le calcul des couleurs cf. # 
+
 
 ## IMPORTANT - Configuration du serveur pour lib GD
 - go to php.ini file
 - search this ;extension=gd
 - remove ; then restart the server
 
+## TODO LIST
 - [X] Changer la formule HSL
 - [X] Mettre en place la purge de la base (images -> repertoire corbeille)
 - [X] Charger les photos : soit sélection répertoire mais le mieux serait "glisser/lacher" pour qu'elle soit intégrée
 - [X] Chargement multiple des photos selon choix utilisateur du répertoire
-- [ ] Ajouter une zone de saisie en HEX pour le choix de la couleur de REFERENCE
-- [ ] Ajouter une case à option (3 choix) pour la finesse THIN / REGULAR / LARGE
-- [ ] Lorsqu'on clique sur une couleur complémentaire/gauche/droite, elle devient la couleur de Référence (et calculer les autres couleurs)
+- [X] Ajouter une zone de saisie en HEX pour le choix de la couleur de REFERENCE
+- [X] Ajouter une case à option (3 choix) pour la finesse THIN / REGULAR / LARGE
+- [X] Lorsqu'on clique sur une couleur complémentaire/gauche/droite, elle devient la couleur de Référence (et calculer les autres couleurs)
 - [X] Basculer en AJAX toute la gestion de version et sauvegarde des tables (purge -> base corbeille / images -> rep. corbeille)
 - [X] Mettre en place le Workflow suivant : upload des nouvelles images -> insertion en base (choix de version) -> Lancement de la recherche des dominantes
-- [ ] Lorsqu'on charge de nouveau fichier, on créé une nouvelle version des tables "image/couleur"
+- [ ] Lorsqu'on charge de nouveaux fichiers, on créé une nouvelle version des tables "image/couleur"
+- [ ] Intégrer l'existant concernant la recherche d'image (ajax)
+- [ ] Développer en AJAX la partie recherche d'image (recherche puis affichage)
 
 
 ## Tips
-### Choix de la couleur et recherche
-Lorsqu'on recherche une couleur avec une roue chromatique (ou input=color) (https://www.w3schools.com/howto/tryit.asp?filename=tryhow_html_colorpicker) il faut proposer une marge de recherche autour de la couleur recherchée :
-
-- THIN : précis par rapport à la recherche (très peu de marge)
-- REGULAR : juste un peu plus au tour (valuer par défaut)
-- LARGE : on déborde et on rammasse un max de correspondance meme si on s'en éloigne un peu.
+Pas de TIPS pour le moment
 
 
 ## ARCHIVES
+- 18.11.2024 : Création des deux pages d'administration - Charger et Purger
+Pas de contenu pour l'instant, la priorité sur le calcul des couleurs cf. # 
+
 - 23.11.2024
 Menu commun pour toutes les pages - TERMINE - fichier HTML "menu_principal.html" en include php
 Voir comment inégrer un menu commun pour toutes les pages -> include
@@ -72,9 +72,17 @@ Activation : faire pointer les Views Image/Couleur vers image_x/couleur_x préc�
 
 DROP TABLE image_vX.
 Le faire pour le couple image/couleur.
-- [X] Il faut mettre en place l'IHM Web
-- [X] Afficher l'ensemble des versions en base
-- [X] un bouton par version trouvée et lancer la suppression version par version (prefixe "archive_")
+- Il faut mettre en place l'IHM Web
+- Afficher l'ensemble des versions en base
+- un bouton par version trouvée et lancer la suppression version par version (prefixe "archive_")
+
+- 15.12.2024
+Choix de la couleur et recherche
+Lorsqu'on recherche une couleur avec une roue chromatique (ou input=color) (https://www.w3schools.com/howto/tryit.asp?filename=tryhow_html_colorpicker) il faut proposer une marge de recherche autour de la couleur recherchée :
+
+- THIN : précis par rapport à la recherche (très peu de marge)
+- REGULAR : juste un peu plus au tour (valuer par défaut)
+- LARGE : on déborde et on rammasse un max de correspondance meme si on s'en éloigne un peu.
 
 
 ## DOCUMENTATIONS

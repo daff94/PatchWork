@@ -228,7 +228,7 @@
     function rechercheImages(){
         // Récupération de la couleur de référence - rgb(xxx,xxx,xxx)
         const referenceCouleur = document.querySelector('#pr1').style.backgroundColor;
-        console.log(referenceCouleur);
+
     }
 
     function update(picker, selector) {
@@ -254,7 +254,6 @@
     <div class="parent">
         <div class="div1 carrepreview" id="couleurSemblableMoins" style="background-color: rgb(166, 32, 30);" onclick="switchcolor(this);"></div>
         <div class="div2 reference" id="pr1" ><p>Référence</p></div>
-        
         <div class="div3 carrepreview" id="couleurSemblablePlus" style="background-color: rgb(166, 123, 30);" onclick="switchcolor(this);"></div>
     </div>
 
