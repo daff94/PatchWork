@@ -221,24 +221,30 @@
         const chxColor = document.querySelector(idSource).style.backgroundColor;
         // Mise à jour du DIV de Référence
         document.querySelector('#pr1').style.backgroundImage = "linear-gradient(to right, " + chxColor + " 0%, " + chxColor + " 100%)";
-        // document.querySelector('#pr1').style.backgroundImage = chxColor;
         document.querySelector('#pr1').style.backgroundColor = chxColor;
         document.querySelector('#pr1').setAttribute('data-current-color',chxColor);
-       //  document.querySelector('#pr1').setAttribute('data-jscolor','value: ' + chxColor);
-
     }
 
     function rechercheImages(){
         // Récupération de la couleur de référence - rgb(xxx,xxx,xxx)
-        const referenceCouleur = document.querySelector('#pr1').getAttribute('data-current-color');
+        const referenceCouleur = document.querySelector('#pr1').style.backgroundColor;
         console.log(referenceCouleur);
     }
+
+    function update(picker, selector) {
+    affComplementaire(picker.toRGBString());
+    document.querySelector('#pr1').style.backgroundColor = picker.toRGBString();
+    }
+
+    // triggers 'onInput' and 'onChange' on all color pickers when they are ready
+    // Permet de mettre à jour la boite "Référence" avec la couleur par defaut du composant
+    jscolor.trigger('input change');
 
     </script> 
 
 </head>
 
-<body>
+<body class="mybody">
 
 <!-- Chargement du menu principal du site -->
 <?php include 'menu_principal.html' ?>
@@ -261,35 +267,18 @@
             <label class="form-check-label" for="Regular">Regular</label>
             <input class="form-check-input" type="radio" id="Large" name="chxtolerance" />
             <label class="form-check-label" for="Large">Large</label>
-            <input class="form-check-input" type="checkbox" id="chxcouleurOnly" name="chxcouleurOnly" />
+            <input class="form-check-input" type="checkbox" id="chxcouleurOnly" name="chxcouleurOnly" checked/>
             <label class="form-check-label" for="chxcouleurOnly">Couleurs</label>
         </div>
         <div class="div3 carretolerance" id="tolerancePLUS" onclick="switchcolor(this);"></div>
     </div>
+    <div class="input-group mb-3 carreinput">
+        <span class="input-group-text" id="basic-addon1">Choix de la couleur : </span>
+        <input class="form-control" data-jscolor="{value:'#FC9737', previewElement:'#pr1'}" id="chxcouleurtxt"  oninput="update(this.jscolor, '#pr1')" >
+    </div>
     <div><button class="button" type="button" onclick="rechercheImages();">Rechercher les photos similaires</button></div>
+    
 </div>
-
-
-
-<p>
-    For text INPUTS, you can keep with classic HTML attributes:
-    <input id="chxcouleurtxt" value="CCFFAA" oninput="update(this.jscolor, '#pr1')" data-jscolor="{previewElement:'#pr1'}">
-</p>
-
-<script>
-// onChange="update(this.jscolor, '#pr1')" onInput="affComplementaire()"
-function update(picker, selector) {
-    // document.querySelector(selector).style.background = picker.toBackground();
-    affComplementaire(picker.toRGBString());
-}
-
-
-</script>
-
-
-
-
-
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>

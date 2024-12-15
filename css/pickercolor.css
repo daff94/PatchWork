@@ -1,6 +1,6 @@
 
 .mybody {
-  background-color: #d4d4d4;
+  background-color: #9c9c9c;
 }
 
 .carrepreview, .carrecomplementaire  { 
@@ -25,7 +25,16 @@
   /* box-shadow: 5px 5px 5px rgb(80, 80, 80); */
 }
 
-.carrepreview:hover, .carrecomplementaire:hover, .reference:hover {
+.carreinput {
+  text-align: center;
+  height: 50px;
+  border: 2px solid rgb(190, 190, 190);
+  padding: 5px;
+  margin-top: 5px;
+  border-radius: 5px;
+}
+
+.carrepreview:hover, .carrecomplementaire:hover, .reference:hover, .carretolerance:hover {
     box-shadow: 3px 3px 3px rgb(143, 143, 143);
 }
 
@@ -51,6 +60,14 @@ p {
     font-weight: lighter;
     text-shadow: 3px 3px 4px rgb(36, 36, 36);
     margin: 2px;
+}
+
+.inputchxColor {
+  text-align: center;
+}
+
+.inputHEX {
+  text-align: center;
 }
 
 .parent {
