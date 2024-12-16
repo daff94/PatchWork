@@ -181,11 +181,11 @@
             ltolerance = 0;
         }
 
-        // Calcul la fourchette de tolérance pour la Teinte mais certainement pour les autres (à tester).
+        // Calcul la fourchette de tolérance pour la Teinte et pour les autres.
         // Tolerance appliquée sur le cercle chromatique
         let tdegreplus = Math.round((hsv[0] + (ttolerance/360)) * 360);
         let tdegremoins = Math.round((hsv[0] - (ttolerance/360)) * 360);
-        // Tolérance appliquée sur Saturation et Luminance
+        // Tolérance appliquée sur Saturation et Luminance si la case "Couleurs" n'est pas cochée
         let spourcplus = Math.round((hsv[1] + stolerance) * 100);
         let spourcmoins = Math.round((hsv[1] - stolerance) * 100);
         let lpourcplus = Math.round((hsv[2] + ltolerance) * 100);

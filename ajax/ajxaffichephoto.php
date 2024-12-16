@@ -27,6 +27,7 @@ and lluminance >= $reqlummin and lluminance <= $reqlummax";
 
 $trouvequivalence = $con->query($sqltrouvequivalence);
 
+echo "<div class='divtinyimg'>";
 if ($trouvequivalence->num_rows > 0) {
     // pour chaque correspondance trouv�e dans "couleur"
     while($row = $trouvequivalence->fetch_assoc()) {
@@ -43,6 +44,7 @@ if ($trouvequivalence->num_rows > 0) {
 else {
     echo "<p>Aucun correpsondance trouvée.</p>";
 }
+echo "</div>";
 
 /* 
 echo "<table>
