@@ -194,13 +194,21 @@
         // Gestion des limites
         // pour les degres
         if (tdegreplus > 359) { tdegreplus = 359; }
-        if (tdegremoins < 0) { tdegremoins = 1; }
+        if (tdegremoins < 0) { tdegremoins = 0; }
         // pour les pourcentages
         if (spourcplus >= 100) { spourcplus = 100; }
-        if (spourcmoins <= 0) { spourcmoins = 1; }
+        if (spourcmoins < 0) { spourcmoins = 0; }
         if (lpourcplus >= 100) { lpourcplus = 100; }
-        if (lpourcmoins <= 0){ lpourcmoins = 1; }
-        
+        if (lpourcmoins < 0){ lpourcmoins = 0; }
+
+        // On se garde en GLOBAL pour utiliser lors de la recherche de la photo
+        global_tdegreplus = tdegreplus;
+        global_tdegremoins = tdegremoins;
+        global_spourcplus = spourcplus;
+        global_spourcmoins = spourcmoins;
+        global_lpourcplus = lpourcplus;
+        global_lpourcmoins = lpourcmoins;
+
         const hsvTolerancePlus = [tdegreplus / 360, spourcplus / 100, lpourcplus / 100];
         const hsvToleranceMoins = [tdegremoins / 360, spourcmoins / 100, lpourcmoins / 100];
 
@@ -228,7 +236,21 @@
     function rechercheImages(){
         // Récupération de la couleur de référence - rgb(xxx,xxx,xxx)
         const referenceCouleur = document.querySelector('#pr1').style.backgroundColor;
+        console.log(global_tdegreplus);
+        console.log(global_tdegremoins);
+        console.log(global_spourcplus);
+        console.log(global_spourcmoins);
+        console.log(global_lpourcplus);
+        console.log(global_lpourcmoins);
 
+        var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+              if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("txtHint").innerHTML = this.responseText;
+              }
+            };
+            xmlhttp.open("GET","/patchwork/ajax/ajxaffichephoto.php?reqhuemin=" + global_tdegremoins + "&reqhuemax=" + global_tdegreplus + "&reqsatmin=" + global_spourcmoins + "&reqsatmax=" + global_spourcplus + "&reqlummin=" + global_lpourcmoins + " &reqlummax=" + global_lpourcplus,true);
+            xmlhttp.send();
     }
 
     function update(picker, selector) {
@@ -276,7 +298,8 @@
         <input class="form-control" data-jscolor="{value:'#FC9737', previewElement:'#pr1'}" id="chxcouleurtxt"  oninput="update(this.jscolor, '#pr1')" >
     </div>
     <div><button class="button" type="button" onclick="rechercheImages();">Rechercher les photos similaires</button></div>
-    
+    <!-- Reception de l'appel AJAX pour trouver les photos en fonction du choix des couleurs -->
+    <div id="txtHint" class="container"></div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>

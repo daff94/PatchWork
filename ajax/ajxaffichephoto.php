@@ -25,8 +25,6 @@ where hteinte >= $reqhuemin and hteinte <= $reqhuemax
 and ssaturation >= $reqsatmin and ssaturation <= $reqsatmax 
 and lluminance >= $reqlummin and lluminance <= $reqlummax";
 
-echo "<br>" . $sqltrouvequivalence . "<br>";
-
 $trouvequivalence = $con->query($sqltrouvequivalence);
 
 if ($trouvequivalence->num_rows > 0) {
@@ -37,10 +35,13 @@ if ($trouvequivalence->num_rows > 0) {
         $resultimage = $con->query($sqlimage);
         if ($resultimage->num_rows > 0) {
             while($rowimage = $resultimage->fetch_assoc()) {
-                echo "<img src='" . "data:image/jpeg;base64," . base64_encode($rowimage['imgphoto']) . "'/>";
+                echo "<img class='tinyimg' src='" . "data:image/jpeg;base64," . base64_encode($rowimage['imgphoto']) . "'/>";
             }
         }
     }
+}
+else {
+    echo "<p>Aucun correpsondance trouvée.</p>";
 }
 
 /* 

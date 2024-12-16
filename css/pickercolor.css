@@ -122,3 +122,8 @@ p {
     display: inline-block;
     font-size: 16px;
   }
+
+
+  .tinyimg {
+    width: 200px;
+}
