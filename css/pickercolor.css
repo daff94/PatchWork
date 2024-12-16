@@ -1,6 +1,6 @@
 
 .mybody {
-  background-color: #9c9c9c;
+  background-color: #757575;
 }
 
 .carrepreview, .carrecomplementaire  { 
@@ -55,10 +55,10 @@
 }
 
 p {
-    font-family: arial;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: large;
     font-weight: lighter;
-    text-shadow: 3px 3px 4px rgb(36, 36, 36);
+    /* text-shadow: 3px 3px 4px rgb(36, 36, 36);*/
     margin: 2px;
 }
 
@@ -67,6 +67,7 @@ p {
 }
 
 .inputHEX {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   text-align: center;
 }
 
