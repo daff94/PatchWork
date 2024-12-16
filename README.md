@@ -18,8 +18,8 @@
 - [X] Basculer en AJAX toute la gestion de version et sauvegarde des tables (purge -> base corbeille / images -> rep. corbeille)
 - [X] Mettre en place le Workflow suivant : upload des nouvelles images -> insertion en base (choix de version) -> Lancement de la recherche des dominantes
 - [ ] Lorsqu'on charge de nouveaux fichiers, on créé une nouvelle version des tables "image/couleur"
-- [ ] Intégrer l'existant concernant la recherche d'image (ajax)
-- [ ] Développer en AJAX la partie recherche d'image (recherche puis affichage)
+- [X] Intégrer l'existant concernant la recherche d'image (ajax)
+- [X] Développer en AJAX la partie recherche d'image (recherche puis affichage)
 
 
 ## Tips
