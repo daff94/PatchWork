@@ -295,7 +295,7 @@
     </div>
     <div class="input-group mb-3 carreinput">
         <span class="input-group-text" id="basic-addon1">Choix de la couleur : </span>
-        <input class="form-control" data-jscolor="{value:'#FC9737', previewElement:'#pr1'}" id="chxcouleurtxt"  oninput="update(this.jscolor, '#pr1')" >
+        <input class="form-control" data-jscolor="{value:'#FC9737', previewElement:'#pr1', onChange:'rechercheImages()'}" id="chxcouleurtxt"  oninput="update(this.jscolor, '#pr1')" >
     </div>
     <div><button class="button" type="button" onclick="rechercheImages();">Rechercher les photos similaires</button></div>
     <!-- Reception de l'appel AJAX pour trouver les photos en fonction du choix des couleurs -->
