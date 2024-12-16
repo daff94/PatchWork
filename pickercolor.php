@@ -256,6 +256,7 @@
     function update(picker, selector) {
     affComplementaire(picker.toRGBString());
     document.querySelector('#pr1').style.backgroundColor = picker.toRGBString();
+    rechercheImages();
     }
 
     // triggers 'onInput' and 'onChange' on all color pickers when they are ready
@@ -299,7 +300,7 @@
     </div>
     <div><button class="button" type="button" onclick="rechercheImages();">Rechercher les photos similaires</button></div>
     <!-- Reception de l'appel AJAX pour trouver les photos en fonction du choix des couleurs -->
-    <div id="txtHint" class="container"></div>
+    <div class="div1" id="txtHint"></div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
