@@ -8,7 +8,7 @@
   <link href="css/modale.css" rel="stylesheet">
   <link href="css/main.css" rel="stylesheet">
 </head>
-<body>
+<body class="mybody">
 
 
 <!-- Chargement du menu principal du site -->
