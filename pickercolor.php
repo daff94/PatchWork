@@ -284,13 +284,13 @@
         <div class="div1 carretolerance" id="toleranceMOINS" onclick="switchcolor(this);"></div>
         <div class="div2">
             <input class="form-check-input" type="radio" id="Tiny" name="chxtolerance" />
-            <label class="form-check-label" for="Tiny">Tiny</label>
+            <label class="form-check-label lblwhite" for="Tiny">Tiny</label>
             <input class="form-check-input" type="radio" id="Regular" name="chxtolerance" checked/>
-            <label class="form-check-label" for="Regular">Regular</label>
+            <label class="form-check-label lblwhite" for="Regular">Regular</label>
             <input class="form-check-input" type="radio" id="Large" name="chxtolerance" />
-            <label class="form-check-label" for="Large">Large</label>
+            <label class="form-check-label lblwhite" for="Large">Large</label>
             <input class="form-check-input" type="checkbox" id="chxcouleurOnly" name="chxcouleurOnly" checked/>
-            <label class="form-check-label" for="chxcouleurOnly">Couleurs</label>
+            <label class="form-check-label lblwhite" for="chxcouleurOnly">Couleurs</label>
         </div>
         <div class="div3 carretolerance" id="tolerancePLUS" onclick="switchcolor(this);"></div>
     </div>

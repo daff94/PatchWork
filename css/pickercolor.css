@@ -1,6 +1,8 @@
 
 .mybody {
-  background-color: #757575;
+  /* background-color: #757575;*/ 
+  background: rgb(52,52,52);
+  background: radial-gradient(circle, rgba(52,52,52,1) 0%, rgba(31,31,31,1) 69%);
 }
 
 .carrepreview, .carrecomplementaire  { 
@@ -137,3 +139,9 @@ p {
     width: 100%;
     padding-top: 10px;
     }
+
+  .lblwhite {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 100;
+    color: azure;
+  }
