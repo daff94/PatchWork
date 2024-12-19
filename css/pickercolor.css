@@ -30,7 +30,7 @@
 .carreinput {
   text-align: center;
   height: 50px;
-  border: 2px solid rgb(190, 190, 190);
+  /* border: 2px solid rgb(190, 190, 190);*/ 
   padding: 5px;
   margin-top: 5px;
   border-radius: 5px;
@@ -131,8 +131,14 @@ p {
     width: 200px;
     border : 2px solid #000000;
     box-shadow:8px 8px 10px 0 rgba(0,0,0,0.5);
-
+    transition: transform .1s;
   }
+
+  .tinyimg:hover{
+    -ms-transform: scale(2.0); /* IE 9 */
+    -webkit-transform: scale(2.0); /* Safari 3-8 */
+    transform: scale(2.0);
+    }
 
   .divtinyimg {
     text-align: center;
