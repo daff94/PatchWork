@@ -11,31 +11,31 @@
 <!-- Chargement du menu principal du site -->
 <?php include 'menu_principal.html' ?>
 
-<div class="container-fluid" >
-
-    <div>
-      <h1>Ensemble des photos</h1>
-    </div>
-
 <?php
 $con = mysqli_connect("localhost","root","","patchwork");
 // Check connection
 if (mysqli_connect_errno())
   {   echo "Failed to connect to MySQL: " . mysqli_connect_error();  }
 
-//selection de la photo par son ID
-//$sql = "SELECT hex, pourcentage,rrouge, gvert, bbleu, hteinte, ssaturation, lluminance, c.nomImage as nomImage FROM couleur i INNER JOIN image c ON i.extIdImage = c.idImage where c.idImage=4 order by i.pourcentage DESC";
-
-
-// Liste une seule photo en fonction de son ID : idImage
-//$sqlUnePhotoID ="SELECT idImage, imgphoto from image where idImage=45";
+// Quelle est la version des tables activée :
+$sqlListeVersion = "SELECT * FROM refversion where refencours='X'";
+$ListeVersion = $con->query($sqlListeVersion);
+$rowVersion = mysqli_fetch_array($ListeVersion);
+$versionencours = $rowVersion['refversion'];
 
 // liste de toutes les images présentes en base.
 $sqlToutesPhotoID = "SELECT idImage, imgphoto from image";
 $resultToutesPhotoID = $con->query($sqlToutesPhotoID);
+$nbrImages = $resultToutesPhotoID->num_rows;
 
-// $sqlcountVariante = "SELECT count(idImage) from color";
+echo "<div class='container-fluid' >";
+	echo "<div>";
+		echo "<h1>Ensemble des photos : " . $nbrImages . " images</h1>";
+		echo "<p>Version activée : " . $versionencours . "</p>";
+	echo "</div>";
+echo "</div>";
 
+echo "<div class='container-fluid' >";
 
 if ($resultToutesPhotoID->num_rows > 0) {
     while($rowImage = $resultToutesPhotoID->fetch_assoc()) {
